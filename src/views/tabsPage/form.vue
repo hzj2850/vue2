@@ -3,13 +3,13 @@
         <div>{{ form }}</div>
 
         <a-form-model ref="ruleForm" :model="form" :rules="rules">
-            <a-form-model-item label="下拉框" prop="selectId">
-                <MySelect v-model="form.selectId"  :text.sync="form.selectName" :list="selectList" :show-search="true"></MySelect>
+            <a-form-model-item label="下拉框" prop="selectId" hasFeedback>
+                <MySelect v-model="form.selectId" :text.sync="form.selectName" :show-search="true"></MySelect>
             </a-form-model-item>
-            <a-form-model-item label="日期" prop="date">
+            <a-form-model-item label="日期" prop="date" hasFeedback>
                 <MyDate v-model="form.date"></MyDate>
             </a-form-model-item>
-            <a-form-model-item label="时间段" prop="startTime">
+            <a-form-model-item label="时间段" prop="startTime" hasFeedback>
                 <MyRange v-model="form.startTime" :end.sync="form.endTime"></MyRange>
             </a-form-model-item>
         </a-form-model>
@@ -32,11 +32,6 @@ export default {
     data() {
         return {
             form: {},
-            selectList: [
-                {id: 1, text: '王二'},
-                {id: 2, text: '张三'},
-                {id: 3, text: '李四'},
-            ],
             rules: {
                 selectId: [{ required: true, message: '下拉框必选', trigger: 'change' }],
                 date: [{ required: true, message: '日历必须', trigger: 'change' }],

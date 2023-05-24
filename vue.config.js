@@ -44,7 +44,9 @@ module.exports = {
         'style-resources-loader': {
             preProcessor: 'less',
             patterns: [
-                require('path').resolve('./src/assets/css/color.less'),
+                require('path').resolve('./src/assets/less/color.less'),
+                require('path').resolve('./src/assets/less/layout.less'),
+                require('path').resolve('./src/assets/iconfont.css'),
             ]
         }
     }

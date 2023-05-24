@@ -9,12 +9,22 @@ export default {
         },
         list: {
             type: Array,
-            required: true
+            default: () => ([
+                {id: 1, text: '王二'},
+                {id: 2, text: '张三'},
+                {id: 3, text: '李四'},
+            ])
         },
     },
     model: {
         prop: "id",
         event: "change",
+    },
+    watch: {
+        id(v) {
+            const o = this.list.find(e => e.id === v) || {};
+            this.$emit('update:text', o.text);
+        },
     },
     render() {
         const list = this.$props.list.map(e => <a-select-option value={ e.id }>{ e.text }</a-select-option>);
@@ -30,12 +40,6 @@ export default {
         return <a-select on={on} props={props}>
             { list }
         </a-select>
-    },
-    watch: {
-        id(v) {
-            const o = this.list.find(e => e.id === v) || {};
-            this.$emit('update:text', o.text);
-        },
     },
 }
 </script>

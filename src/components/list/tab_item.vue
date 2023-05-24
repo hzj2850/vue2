@@ -57,7 +57,7 @@ export default {
     }
     > .iconfont{
         color: rgb(27, 122, 220);
-        font-size: 50px;
+        font-size: 30px;
     }
     // &:hover {
     //     background: linear-gradient(180.00deg, rgba(0,19,66,0.5) 0%,rgba(0,76,197,1) 50%,rgba(0,19,66,0.5) 100%);

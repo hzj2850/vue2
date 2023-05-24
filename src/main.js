@@ -20,9 +20,6 @@ Vue.use(Directives);
 Vue.use(Prototype);
 Vue.use(Filter);
 
-import './assets/iconfont.css'
-import './assets/css/reset.css'
-import './assets/css/layout.less'
 import "swiper/dist/idangerous.swiper.css";
 
 Vue.config.productionTip = false
