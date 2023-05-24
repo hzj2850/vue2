@@ -45,14 +45,14 @@ export default {
         }
     },
     mounted() {
-        // setTimeout(() => {
-        //     this.form = { 
-        //         date: "2023-03-26 13:40:58", 
-        //         startTime: "2023-03-18 15:06:23", 
-        //         endTime: "2023-04-14 15:06:23",
-        //         selectId: 3 
-        //     };
-        // }, 300);
+        setTimeout(() => {
+            this.form = { 
+                date: "2023-03-26 13:40:58", 
+                startTime: "2023-03-18 15:06:23", 
+                endTime: "2023-04-14 15:06:23",
+                selectId: 3 
+            };
+        }, 300);
     },
     methods: {
         // 提交

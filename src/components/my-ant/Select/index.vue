@@ -11,53 +11,25 @@ export default {
             type: Array,
             required: true
         },
-        // 是否可搜索
-        showSearch: {
-            type: Boolean,
-            default: false,
-        },
     },
-    // 这里用来定义v-model的值
     model: {
         prop: "id",
         event: "change",
     },
-    render(h) {
-        return h(
-            'a-select', 
-            {
-                class: [
-                    'my-select',
-                ],
-                props: {
-                    value: this.id === 0 ? 0 : (this.id || undefined),
-                    showSearch: this.showSearch,
-                    placeholder: "请选择",
-                },
-                on: {
-                    // 更新数据
-                    change: (v) => {
-                        this.$emit("change", v);
-                    },
-                    // 对选项进行搜索
-                    filterOption: (input, option) => {
-                        return ( option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0 );
-                    }
-                }
-            }, 
-            // 嵌套到 this.tag 元素上
-            this.list.map(item=>
-                h(
-                    'a-select-option', 
-                    {
-                        props:{
-                            value: item.id,
-                        }
-                    }, 
-                    item.text
-                )
-            )
-        );
+    render() {
+        const list = this.$props.list.map(e => <a-select-option value={ e.id }>{ e.text }</a-select-option>);
+        const props = {
+            value: this.$props.id,
+            filterOption: (input, option) => option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0,
+            placeholder: "请选择",
+            ...this.$attrs,
+        }
+        const on = {
+            change: (v) => this.$emit("change", v),
+        }
+        return <a-select on={on} props={props}>
+            { list }
+        </a-select>
     },
     watch: {
         id(v) {
