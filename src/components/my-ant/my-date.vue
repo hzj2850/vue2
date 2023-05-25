@@ -3,7 +3,8 @@ import moment from 'moment';
 export default {
     props: {
         value: {
-            type: String | undefined
+            type: String,
+            default: ''
         },
         vformat: {
             type: String,
@@ -19,7 +20,7 @@ export default {
             show: false
         }
     },
-    render(h) {
+    render() {
         const props = this.$props;
 
         const attrs = {

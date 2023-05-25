@@ -29,7 +29,7 @@ import {
   // Breadcrumb,
   // Steps,
   Spin,
-  // Menu,
+  Menu,
   // Drawer,
   // Tooltip,
   // Alert,
@@ -88,7 +88,7 @@ const importAntd = Vue => {
   // Vue.use(Breadcrumb)
   // Vue.use(Steps)
   Vue.use(Spin)
-  // Vue.use(Menu)
+  Vue.use(Menu)
   // Vue.use(Drawer)
   // Vue.use(Tooltip)
   // Vue.use(Alert)

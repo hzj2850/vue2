@@ -12,7 +12,7 @@ export default {
         }
     },
     render() {
-        const nodes = Object.keys(this.$slots).map(name => (<slot slot={name}>{this.$slots[name]}</slot>))
+        const nodes = Object.keys(this.$slots).map(name => (<slot slot={name}>{this.$slots[name]}</slot>));
         
         // 对话框镶入页面
         if(this.$props.type === 'div') return <div>{ nodes }</div>

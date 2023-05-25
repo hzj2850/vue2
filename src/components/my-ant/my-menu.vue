@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <a-menu
     :default-selected-keys="['1']"
     :default-open-keys="['2']"
@@ -14,30 +14,56 @@
       <sub-menu v-else :key="item.key" :menu-info="item" />
     </template>
   </a-menu>
-</template>
+</template> -->
 
 <script>
-import SubMenu from "./SubMenu.vue";
 export default {
-  components: {
-    "sub-menu": SubMenu,
+  render() {
+
+
+    function filterData(arr) {
+        let list = []
+        for(let item of arr) {
+          if(item.children) {
+            list.push(<li>
+              { item.title }
+              {filterData(item.children)}
+            </li>)
+          } else {
+            list.push(<li>{ item.title }</li>)
+          }
+        }
+        return <ul>{ list }</ul>
+    }
+
+    const attrs = {
+      mode: "inline",
+      ...this.$attrs
+    }
+    return <div>
+      {filterData(this.list)}
+    </div>
   },
   data() {
     return {
       collapsed: false,
       list: [
         {
+          key: '3',
+          title: '第一节1'
+        },
+        {
           key: "1",
-          title: "Option 1",
-          children: [{ key: "1.1", title: "1-2" }],
+          title: "第一节2",
+          children: [{ key: "1.1", title: "1-1" }],
         },
         {
           key: "2",
-          title: "Navigation 2",
+          title: "第一节3",
           children: [
             {
               key: "2.1",
-              title: "Navigation 3",
+              title: "2-1",
               children: [
                 {
                   key: "2.1.1",
@@ -50,11 +76,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed;
-    },
   },
 };
 </script>

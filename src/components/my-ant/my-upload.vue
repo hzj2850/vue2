@@ -42,6 +42,7 @@ export default {
     height: @input-height;
     line-height: @input-height;
     font-size: @input-font-size;
+    border-radius: 4px;
     /deep/ .ant-upload{
         padding: 0;
         border: none;

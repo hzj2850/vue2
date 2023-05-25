@@ -32,6 +32,14 @@
 
         <a-button @click="onSubmit()">提交</a-button>
         <a-button @click="resetForm()">清空</a-button>
+        <a-button @click="$refs.modal.open()">弹框</a-button>
+        <a-button @click="modal = (modal === 'div'?'modal':'div')">弹框{{ modal }}</a-button>
+
+        <MyModal ref="modal" :type="modal" title="弹框">
+            1111111111111111111111111111111111
+        </MyModal>
+
+        <MyMenu style="width: 200px;" />
     </div>
 </template>
 
@@ -40,12 +48,16 @@ import MySelect from '@/components/my-ant/my-select.vue'
 import MyDate from '@/components/my-ant/my-date.vue'
 import MyRange from '@/components/my-ant/my-range.vue'
 import MyUpload from '@/components/my-ant/my-upload.vue'
+import MyModal from '@/components/my-ant/my-modal.vue'
+import MyMenu from '@/components/my-ant/my-menu.vue'
 export default {
     components: {
         MySelect,
         MyDate,
         MyRange,
         MyUpload,
+        MyModal,
+        MyMenu
     },
     data() {
         return {
@@ -60,7 +72,8 @@ export default {
                 year: [{ required: true, message: '年份必须', trigger: 'change' }],
                 startTime: [{ required: true, message: '时间段', trigger: 'change' }],
                 imgs: [{ required: true, message: '图片必填', trigger: 'change' }],
-            }
+            },
+            modal: 'modal'
         }
     },
     mounted() {

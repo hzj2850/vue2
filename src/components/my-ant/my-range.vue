@@ -13,7 +13,7 @@ export default {
         prop: "start",
         event: "change",
     },
-    render(h) {
+    render() {
         const props = this.$props;
 
         const attrs = {
