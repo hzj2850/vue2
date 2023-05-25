@@ -34,7 +34,6 @@
 
 <script>
 import MyBtn from '@/components/svg/my-btn.vue'
-import DragScale from '@/utils/drag-move.js'
 export default {
     components: {
         MyBtn,
@@ -80,8 +79,6 @@ export default {
         },
     },
     mounted() {
-        let drag = new DragScale(this.$refs.dragBar, this.$refs.dragTarget);
-        drag.drag();
     },
     methods: {
         bindOnOff(e) {

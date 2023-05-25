@@ -3,14 +3,30 @@
         <div>{{ form }}</div>
 
         <a-form-model ref="ruleForm" :model="form" :rules="rules">
-            <a-form-model-item label="下拉框" prop="selectId" hasFeedback>
-                <MySelect v-model="form.selectId" :text.sync="form.selectName" :show-search="true"></MySelect>
+            <a-form-model-item label="下拉框" prop="selectId">
+                <MySelect v-model="form.selectId" :text.sync="form.selectName" :show-search="true" allowClear></MySelect>
             </a-form-model-item>
-            <a-form-model-item label="日期" prop="date" hasFeedback>
+            <!-- time|date|month|year|decade -->
+            <a-form-model-item label="time" prop="time">
+                <MyDate v-model="form.time" mode="time"></MyDate>
+            </a-form-model-item>
+            <a-form-model-item label="date" prop="date">
                 <MyDate v-model="form.date"></MyDate>
             </a-form-model-item>
-            <a-form-model-item label="时间段" prop="startTime" hasFeedback>
+            <a-form-model-item label="month" prop="month">
+                <MyDate v-model="form.month" mode="month" format="M月" vformat="M"></MyDate>
+            </a-form-model-item>
+            <a-form-model-item label="year" prop="year">
+                <MyDate v-model="form.year" mode="year" format="YYYY年" vformat="YYYY"></MyDate>
+            </a-form-model-item>
+
+            <a-form-model-item label="时间段" prop="startTime">
                 <MyRange v-model="form.startTime" :end.sync="form.endTime"></MyRange>
+            </a-form-model-item>
+            <a-form-model-item label="上传" prop="imgs">
+                <MyUpload :upload="bindUplad">
+                    上传图片
+                </MyUpload>
             </a-form-model-item>
         </a-form-model>
 
@@ -20,34 +36,42 @@
 </template>
 
 <script>
-import MySelect from '@/components/my-ant/Select/index.vue'
-import MyDate from '@/components/my-ant/DatePicker/index.vue'
-import MyRange from '@/components/my-ant/DatePicker/range.vue'
+import MySelect from '@/components/my-ant/my-select.vue'
+import MyDate from '@/components/my-ant/my-date.vue'
+import MyRange from '@/components/my-ant/my-range.vue'
+import MyUpload from '@/components/my-ant/my-upload.vue'
 export default {
     components: {
         MySelect,
         MyDate,
         MyRange,
+        MyUpload,
     },
     data() {
         return {
-            form: {},
+            form: {
+                imgs: []
+            },
             rules: {
                 selectId: [{ required: true, message: '下拉框必选', trigger: 'change' }],
                 date: [{ required: true, message: '日历必须', trigger: 'change' }],
+                month: [{ required: true, message: '月份必须', trigger: 'change' }],
+                time: [{ required: true, message: 'time必须', trigger: 'change' }],
+                year: [{ required: true, message: '年份必须', trigger: 'change' }],
                 startTime: [{ required: true, message: '时间段', trigger: 'change' }],
+                imgs: [{ required: true, message: '图片必填', trigger: 'change' }],
             }
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.form = { 
-                date: "2023-03-26 13:40:58", 
-                startTime: "2023-03-18 15:06:23", 
-                endTime: "2023-04-14 15:06:23",
-                selectId: 3 
-            };
-        }, 300);
+        // setTimeout(() => {
+        //     this.form = { 
+        //         date: "2023-03-26 13:40:58", 
+        //         startTime: "2023-03-18 15:06:23", 
+        //         endTime: "2023-04-14 15:06:23",
+        //         selectId: 3 
+        //     };
+        // }, 300);
     },
     methods: {
         // 提交
@@ -69,6 +93,17 @@ export default {
                 console.log('请求相应：' ,res)
             })
         },
+        bindUplad(o) {
+            // let data = new FormData();
+            // data.append("file", o.file);
+            // data.append("type", 1);
+            return this.$userApi.fastmock({
+                name: '王二'
+            }, {loading: true}).then(res => {
+                this.form.imgs.push(res);
+                console.log('上传成功', o, res);
+            });
+        }
     }
 }
 </script>
@@ -95,5 +130,11 @@ export default {
     > .ant-form-item-control-wrapper{
         flex: 1;
     }
+}
+
+.my-upload{
+    color: #fff;
+    line-height: 40px;
+    background: #ccc;
 }
 </style>

@@ -31,7 +31,6 @@
 <script>
 import OnOffLamp from '@/components/list/on_off_lamp.vue'
 import MyBtn from '@/components/svg/my-btn.vue'
-import DragScale from '@/utils/drag-move.js'
 export default {
     components: {
         OnOffLamp,
@@ -65,8 +64,6 @@ export default {
         },
     },
     mounted() {
-        let drag = new DragScale(this.$refs.dragBar, this.$refs.dragTarget);
-        drag.drag();
     },
     methods: {
         bindOnOff(e) {

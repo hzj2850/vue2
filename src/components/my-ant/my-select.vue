@@ -45,8 +45,21 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.my-select{
+.ant-select{
     width: 100%;
-    min-width: 120px;
+    font-size: @input-font-size;
+    /deep/ .ant-select-selection {
+        height: @input-height;
+    }
+    /deep/ .ant-select-selection__rendered{
+        line-height: calc(@input-height - 2px);
+    }
+    /deep/ .ant-select-arrow, /deep/ .ant-select-selection__clear{
+        font-size: @input-icon-size;
+        margin: 0;
+        transform: translateY(-50%);
+        width: initial;
+        height: initial;
+    }
 }
 </style>

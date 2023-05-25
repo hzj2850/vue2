@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import MyScrollBar from '@/utils/MyScrollBar'
 export default {
     data() {
         return {
@@ -50,10 +49,7 @@ export default {
         }
     },
     mounted() {
-        const MyBar = new MyScrollBar({
-            ele: document.querySelector('.list_content')
-        });
-        console.log(MyBar,'kkkkkkkkk')
+       
 
     },
     methods: {

@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import DragScale from '@/utils/drag-move.js'
 export default {
     computed: {
         lampList() {
@@ -43,8 +42,6 @@ export default {
         },
     },
     mounted() {
-        let drag = new DragScale(this.$refs.dragBar, this.$refs.dragTarget);
-        drag.drag();
     },
 }
 </script>
