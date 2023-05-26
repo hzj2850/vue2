@@ -1,7 +1,7 @@
 <template>
     <div class="table-list">
         <div :class="['item', {'table_list_header': item.table_list_header}]" v-for="(item, index) in listData" :key="index">
-            <div class="col" v-for="(e, i) in head_cfig" :key="i" :style="{'minWidth': e.minWidth, 'maxWidth': e.maxWidth, 'width': e.width}">
+            <div class="col" v-for="(e, i) in columns" :key="i" :style="{'minWidth': e.minWidth, 'maxWidth': e.maxWidth, 'width': e.width}">
                 <slot :name="item.table_list_header ? e.slot + '-head' : e.slot">
                     {{ item.table_list_header ? e.title : item[e.slot] || '--' }}
                 </slot>
@@ -13,7 +13,7 @@
 <script>
 export default {
     props: {
-        head_cfig: {
+        columns: {
             type: Array,
             default: () => {
                 return []
@@ -29,7 +29,7 @@ export default {
     computed: {
         listData() {
             return [
-                { table_list_header: this.head_cfig },
+                { table_list_header: this.columns },
                 ...this.data
             ];
  

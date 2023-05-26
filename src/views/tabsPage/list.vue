@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TableList :head_cfig="head_cfig" :data="list_data">
+        <TableList :columns="head_cfig" :data="list_data">
             <template slot="name4-head">
                 头部
                 <span>123</span>
