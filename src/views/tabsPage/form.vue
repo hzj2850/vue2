@@ -36,10 +36,13 @@
         <a-button @click="modal = (modal === 'div'?'modal':'div')">弹框{{ modal }}</a-button>
 
         <MyModal ref="modal" :type="modal" title="弹框">
-            1111111111111111111111111111111111
+            <MyMenu :default-open-keys="['2']" :selected-keys="[current]" mode="inline" @click="bindMenu">
+                <div slot-scope="item">
+                    {{ item.title }}
+                </div>
+            </MyMenu>
         </MyModal>
 
-        <MyMenu style="width: 200px;" />
     </div>
 </template>
 
@@ -73,7 +76,8 @@ export default {
                 startTime: [{ required: true, message: '时间段', trigger: 'change' }],
                 imgs: [{ required: true, message: '图片必填', trigger: 'change' }],
             },
-            modal: 'modal'
+            modal: 'modal',
+            current: '2-1'
         }
     },
     mounted() {
@@ -116,6 +120,9 @@ export default {
                 this.form.imgs.push(res);
                 console.log('上传成功', o, res);
             });
+        },
+        bindMenu(o) {
+            this.current = o.key;
         }
     }
 }

@@ -1,81 +1,44 @@
-<!-- <template>
-  <a-menu
-    :default-selected-keys="['1']"
-    :default-open-keys="['2']"
-    mode="inline"
-    theme="dark"
-    :inline-collapsed="collapsed"
-  >
-    <template v-for="item in list">
-      <a-menu-item v-if="!item.children" :key="item.key">
-        <a-icon type="pie-chart" />
-        <span>{{ item.title }}</span>
-      </a-menu-item>
-      <sub-menu v-else :key="item.key" :menu-info="item" />
-    </template>
-  </a-menu>
-</template> -->
-
 <script>
 export default {
-  render() {
-
-
-    function filterData(arr) {
-        let list = []
-        for(let item of arr) {
-          if(item.children) {
-            list.push(<li>
-              { item.title }
-              {filterData(item.children)}
-            </li>)
-          } else {
-            list.push(<li>{ item.title }</li>)
-          }
+    props: {
+        list: {
+            type: Array,
+            default: () => ([
+                { key: '1', title: '1' },
+                { key: '2', title: '2', child: [
+                    { key: '2-1', title: '2-1' },
+                    { key: '2-2', title: '2-2' },
+                ]},
+            ])
         }
-        return <ul>{ list }</ul>
-    }
-
-    const attrs = {
-      mode: "inline",
-      ...this.$attrs
-    }
-    return <div>
-      {filterData(this.list)}
-    </div>
-  },
-  data() {
-    return {
-      collapsed: false,
-      list: [
-        {
-          key: '3',
-          title: '第一节1'
-        },
-        {
-          key: "1",
-          title: "第一节2",
-          children: [{ key: "1.1", title: "1-1" }],
-        },
-        {
-          key: "2",
-          title: "第一节3",
-          children: [
-            {
-              key: "2.1",
-              title: "2-1",
-              children: [
-                {
-                  key: "2.1.1",
-                  title: "Option 2.1.1",
-                  children: [{ key: "3", title: "333333" }],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-  },
-};
+    },
+    render() {
+        const slot = item => this.$scopedSlots['default'](item);
+        const attrs = {
+            mode: "inline",
+            ...this.$attrs
+        }
+        const on = {
+            ...this.$listeners
+        }
+        return <a-menu on={on} props={attrs}>{ this.filterData(this.list, slot) }</a-menu>
+    },
+    methods: {
+        // 递归函数
+        filterData(arr, fn) {
+            let list = [];
+            for(let item of arr) {
+                if(item.child) {
+                    list.push(<a-sub-menu {...{key: item.key}}>
+                        <span {...{slot: 'title'}}>{ fn(item) }</span>
+                        {this.filterData(item.child, fn)}
+                    </a-sub-menu>);
+                } else {
+                    list.push(<a-menu-item {...{key: item.key}}>{ fn(item) }</a-menu-item>);
+                }
+            }
+            return list;
+        }
+    },
+}
 </script>
