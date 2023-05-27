@@ -1,10 +1,10 @@
 <template>
     <div>
         <TableList :columns="head_cfig" :data="list_data">
-            <template slot="name4-head">
+            <div slot="name4-head">
                 头部
                 <span>123</span>
-            </template>
+            </div>
             <template slot="name4">
                 555555
             </template>

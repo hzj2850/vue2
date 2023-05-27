@@ -94,12 +94,6 @@ export default {
 
 .tab_page_view{
     height: calc(100vh - 230px);
-    overflow-y: auto;
-    // 隐藏滚动条
-    -ms-overflow-style: none; /* IE 10+ */
-    &::-webkit-scrollbar {
-        width: 0;
-    }
 }
 
 .tab_body{
