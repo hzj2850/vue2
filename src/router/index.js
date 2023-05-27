@@ -27,7 +27,13 @@ const routes = [
         path: 'list',
         name: 'list',
         component: () => import(/* webpackChunkName: "list" */ '../views/tabsPage/list.vue'),
-        meta: {title: '中央空调监控系统'}
+        meta: {title: '列表'}
+      },
+      {
+        path: 'swiper',
+        name: 'swiper',
+        component: () => import(/* webpackChunkName: "swiper" */ '../views/tabsPage/swiper.vue'),
+        meta: {title: '轮播图'}
       },
       {
         path: 'Temperature',
@@ -64,12 +70,6 @@ const routes = [
         name: 'UserLogin',
         component: () => import(/* webpackChunkName: "UserLogin" */ '../views/tabsPage/UserLogin.vue'),
         meta: {title: '用户登录'}
-      },
-      {
-        path: 'DeviceManagement',
-        name: 'DeviceManagement',
-        component: () => import(/* webpackChunkName: "DeviceManagement" */ '../views/tabsPage/DeviceManagement.vue'),
-        meta: {title: '设备管理'}
       },
     ]
   },

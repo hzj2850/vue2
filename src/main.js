@@ -20,8 +20,6 @@ Vue.use(Directives);
 Vue.use(Prototype);
 Vue.use(Filter);
 
-import "swiper/dist/idangerous.swiper.css";
-
 Vue.config.productionTip = false
 
 new Vue({

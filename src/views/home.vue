@@ -30,9 +30,9 @@ export default {
             return [
                 {id: 'form', title: '表单校验', icon: 'icon-a-1xitongzhuye'},
                 {id: 'DragScale', title: '缩放/拖拽', icon: 'icon-a-2zongkonghuamian'},
-                {id: 'DeviceManagement', title: '轮播/图片', icon: 'icon-a-9canshushezhi'},
+                {id: 'swiper', title: '轮播/图片', icon: 'icon-a-9canshushezhi'},
                 {id: 'list', title: '滚动列表', icon: 'icon-a-3AHU01kongtiao'},
-                {id: 4, title: 'AHU02空调', icon: 'icon-a-3AHU01kongtiao'},
+                {id: 'swiper', title: '轮播图', icon: 'icon-a-3AHU01kongtiao'},
                 {id: 'ModularMachine', title: '模块机', icon: 'icon-a-5mokuaiji'},
                 {id: 'Temperature', title: '温湿度压差', icon: 'icon-a-6wenshiduyacha'},
                 {id: 'headlamp', title: '照明灯', icon: 'icon-a-7zhaomingdeng'},
