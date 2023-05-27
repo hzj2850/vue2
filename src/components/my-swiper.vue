@@ -16,17 +16,40 @@ export default {
             mySwiper: null,
             total: 0, // 总数
             activeIndex: 0, // 当前显示的下标
+            oldData: [], // list 的旧数据
         }
     },
     watch: {
-        "list.length": {
-            handler(v) {
-                this.total = v;
+        list: {
+            handler() {
+                const total = this.list.length, o_total = (this.oldData || []).length;
+                // 获取当前操作的下标
+                let idx = -1;
+                if(total > o_total) {
+                    idx = this.list.findIndex((e, i) => {
+                        const obj = this.oldData[i] || {};
+                        return (obj.id || obj.ID) !== (e.id || e.ID);
+                    });
+                    // console.log('添加slide', idx);
+                } else {
+                    idx = this.oldData.findIndex((e, i) => {
+                        const obj = this.list[i] || {};
+                        return (obj.id || obj.ID) !== (e.id || e.ID);
+                    });
+                    // 防止删除最后一个
+                    if(idx === total) idx = total - 1;
+                    // console.log('删除slide', idx);
+                }
+                // 更新轮播图
                 this.$nextTick(function() {
+                    this.total = total;
+                    this.oldData = [...this.list];
                     this.mySwiper.appendSlide("<div>更新轮播图</div>");
                     this.mySwiper.removeLastSlide();
+                    idx >= 0 && this.mySwiper.swipeTo(idx, 500, true);
                 })
-            }
+            },
+            immediate: true
         }
     },
     render() {
@@ -35,7 +58,7 @@ export default {
         const Prev = {
             class: {
                 prev: true,
-                no_prev: attrs.loop === false && this.activeIndex == 0,
+                no_prev: (attrs.loop === false && this.activeIndex == 0) || this.total === 0,
             },
             on: {
                 click: () => this.mySwiper.swipePrev()
@@ -45,7 +68,7 @@ export default {
         const Next = {
             class: {
                 next: true,
-                no_next: attrs.loop === false && this.activeIndex + 1 === this.total,
+                no_next: (attrs.loop === false && this.activeIndex + 1 === this.total) || this.total === 0,
             },
             on: {
                 click: () => this.mySwiper.swipeNext()
@@ -53,7 +76,10 @@ export default {
         }
         
         // 轮播图slide列表
-        const slides = this.$slots.default ? this.$slots.default.map(slot => <div class="swiper-slide">{ slot }</div>) : <div class="swiper-slide">slide1</div>;
+        const slidCfig = {
+            class: {'swiper-slide': true, 'swiper-no-swiping': true}
+        }
+        const slides = this.$slots.slide ? this.$slots.slide.map(slot => <div {...slidCfig}>{ slot }</div>) : this.$slots.default;
         
         return (
             <div class="my-swiper">
@@ -65,7 +91,7 @@ export default {
                 <div class="pagination" />
                 <div {...Prev}>{ this.$scopedSlots.prev ? this.$scopedSlots.prev() : 'prev' }</div>
                 <div {...Next}>{ this.$scopedSlots.next ? this.$scopedSlots.next() : 'next' }</div>
-                <div class="total-tip" domPropsInnerHTML={this.tip.replace('index', this.activeIndex + 1).replace('total', this.total)} />
+                <div class="total-tip" domPropsInnerHTML={this.total ? this.tip.replace('index', this.activeIndex + 1).replace('total', this.total) : ''} />
             </div>
         )
     },

@@ -4,9 +4,13 @@
             <a-icon type="left-circle" slot="prev" />
             <a-icon type="right-circle" slot="next" />
 
-            <div class="item" v-for="(item, index) in list" :key="index">
+            <div class="item" slot="slide" v-for="(item, index) in list" :key="index">
                 <img :src="item.img" :alt="index">
                 <div class="del" @click.stop="bindDel(index)">删除</div>
+            </div>
+
+            <div slot="default">
+                没有数据
             </div>
         </MySwiper>
 
@@ -27,13 +31,8 @@ export default {
     data() {
         return {
             list: [
-                { img: require('@/assets/images/swiper/1.jpg') },
-                { img: require('@/assets/images/swiper/2.jpg') },
-                { img: require('@/assets/images/swiper/3.jpeg') },
-                { img: require('@/assets/images/swiper/4.jpeg') },
-                { img: require('@/assets/images/swiper/5.jpeg') },
-                { img: require('@/assets/images/swiper/6.jpeg') },
-                { img: require('@/assets/images/swiper/7.jpeg') },
+                { id: 1, img: require('@/assets/images/swiper/1.jpg') },
+                { id: 2, img: require('@/assets/images/swiper/2.jpg') },
             ]
         }
     },
@@ -41,7 +40,7 @@ export default {
     },
     methods: {
         upload(o) {
-            this.list.push({ img: o.url });
+            this.list.push({ id: this.list.length + 1, img: o.url });
             return Promise.resolve(o);
         },
         bindDel(index) {
@@ -68,8 +67,8 @@ export default {
     }
     .del{
         position: absolute;
-        left: 50%;
-        top: 50%;
+        right: 10px;
+        top: 10px;
         z-index: 3;
         text-shadow: 0 0 4px #000;
         cursor: pointer;
