@@ -33,7 +33,7 @@ export default {
                 {id: 'swiper', title: '轮播/图片', icon: 'icon-a-9canshushezhi'},
                 {id: 'list', title: '滚动列表', icon: 'icon-a-3AHU01kongtiao'},
                 {id: 'swiper', title: '轮播图', icon: 'icon-a-3AHU01kongtiao'},
-                {id: 'ModularMachine', title: '模块机', icon: 'icon-a-5mokuaiji'},
+                {id: 'ModularMachine', title: '动画列表', icon: 'icon-a-5mokuaiji'},
                 {id: 'Temperature', title: '温湿度压差', icon: 'icon-a-6wenshiduyacha'},
                 {id: 'headlamp', title: '照明灯', icon: 'icon-a-7zhaomingdeng'},
                 {id: 'GermicidalLamp', title: '杀菌灯', icon: 'icon-a-8shajundeng'},

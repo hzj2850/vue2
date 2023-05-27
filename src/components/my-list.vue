@@ -21,6 +21,11 @@ export default {
         default: {
             type: String,
             default: "--"
+        },
+        // 过渡动画
+        transition: {
+            type: String,
+            default: 'v'
         }
     },
     render() {
@@ -40,7 +45,8 @@ export default {
                 },
                 on: {
                     click: () => this.$listeners.click && this.$listeners.click(item, index),
-                }
+                },
+                key: is_head ? 'head' : item.id || item.ID,
             }
             const col = {
                 class: { 'col': true }
@@ -57,7 +63,7 @@ export default {
 
         return <div {...myList}>
             { vnodes[0] }
-            <div class="my-list-body">{ vnodes.splice(1, vnodes.length) }</div>
+            <transition-group appear tag="div" name={this.transition} class="my-list-body">{ vnodes.splice(1, vnodes.length) }</transition-group>
         </div>;
     }
 }
