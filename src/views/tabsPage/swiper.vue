@@ -9,7 +9,7 @@
                 <div class="del" @click.stop="bindDel(index)">删除</div>
             </div>
 
-            <div slot="default">
+            <div class="no-list" slot="default">
                 没有数据
             </div>
         </MySwiper>
@@ -73,5 +73,9 @@ export default {
         text-shadow: 0 0 4px #000;
         cursor: pointer;
     }
+}
+/deep/ .no-list{
+    text-align: center;
+    line-height: 100px;
 }
 </style>
