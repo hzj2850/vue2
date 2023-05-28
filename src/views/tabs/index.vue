@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import TabItem from '../components/list/tab_item.vue'
-import TabHeader from '../components/header/index.vue'
+import TabItem from '@/components/list/tab_item.vue'
+import TabHeader from '@/components/header/index.vue'
 export default {
     components: {
         TabItem,
@@ -30,17 +30,10 @@ export default {
             return [
                 {id: 'form', title: '表单校验', icon: 'icon-a-1xitongzhuye'},
                 {id: 'DragScale', title: '缩放/拖拽', icon: 'icon-a-2zongkonghuamian'},
-                {id: 'swiper', title: '轮播/图片', icon: 'icon-a-9canshushezhi'},
                 {id: 'list', title: '滚动列表', icon: 'icon-a-3AHU01kongtiao'},
                 {id: 'swiper', title: '轮播图', icon: 'icon-a-3AHU01kongtiao'},
-                {id: 'ModularMachine', title: '动画列表', icon: 'icon-a-5mokuaiji'},
-                {id: 'Temperature', title: '温湿度压差', icon: 'icon-a-6wenshiduyacha'},
-                {id: 'headlamp', title: '照明灯', icon: 'icon-a-7zhaomingdeng'},
-                {id: 'GermicidalLamp', title: '杀菌灯', icon: 'icon-a-8shajundeng'},
-                {id: 'AlarmRecord', title: '报警记录', icon: 'icon-a-10baojingjilu'},
-                {id: 11, title: '数据查询', icon: 'icon-a-11shujuchaxun'},
-                {id: 'UserLogin', title: '用户登录', icon: 'icon-a-12yonghudenglu'},
-                {id: 13, title: '用户注销', icon: 'icon-a-13yonghuzhuxiao'},
+                {id: 'svg', title: 'svg', icon: 'icon-a-7zhaomingdeng'},
+                {id: 'shop', title: '商店', icon: 'icon-a-7zhaomingdeng'},
             ]
         },
         // 底部已经选中的导航

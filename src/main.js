@@ -1,4 +1,4 @@
-// 引入@babel/polyfill处理兼容
+// 兼容IE
 import '@babel/polyfill'
 
 import Vue from 'vue'
@@ -6,16 +6,20 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 
-import './utils/main/zoom'
-import Antd from './utils/main/ant'
-import Viewer from './utils/main/v-viewer'
-import VueLazyLoad from './utils/main/vLazy'
-import Directives from './plugins/directive'
-import Prototype from './plugins/prototype'
-import Filter from './plugins/filters'
+// ul库 【Ant Design Vue】
+import Antd from './utils/setting/ant'
 Vue.use(Antd);
+
+// 轮播图、图片懒加载
+import Viewer from './utils/setting/v-viewer'
+import VLazy from './utils/setting/vLazy'
 Vue.use(Viewer);
-Vue.use(VueLazyLoad);
+Vue.use(VLazy);
+
+// 全局（指令、变量、过滤器）
+import Directives from './utils/setting/directive'
+import Prototype from './utils/setting/prototype'
+import Filter from './utils/setting/filters'
 Vue.use(Directives);
 Vue.use(Prototype);
 Vue.use(Filter);

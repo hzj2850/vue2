@@ -1,12 +1,12 @@
 <template>
-  <a-config-provider :locale="zh_CN">
-    <div id="app">
-      <keep-alive>
-        <router-view v-if="$route.meta.keepAlive" />
-      </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive" />
-    </div>
-  </a-config-provider>
+    <a-config-provider :locale="zh_CN">
+        <div id="app">
+            <keep-alive>
+                <router-view v-if="$route.meta.keepAlive" />
+            </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive" />
+        </div>
+    </a-config-provider>
 </template>
 
 <script>
@@ -16,14 +16,13 @@ import "moment/locale/zh-cn";
 moment.locale("zh-cn");
 
 export default {
-  name: "app",
-  data() {
-    return {
-      zh_CN,
-    };
-  },
-  mounted() {},
-  methods: {},
+    name: "app",
+    data() {
+        return {
+            zh_CN,
+        };
+    },
+    mounted() {},
+    methods: {},
 };
 </script>
-

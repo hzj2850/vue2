@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="move" ref="b">
-            <img src="../../assets/images/liya.jpg" ref="t">
+            <img v-lazy="require('@/assets/img/liya.jpg')" ref="t">
         </div>
     </div>
 </template>

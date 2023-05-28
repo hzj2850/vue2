@@ -1,3 +1,4 @@
+/* 获取验证码定时器封装 */
 class Countdown {
 	constructor() {
 		this.Inter = null; // 定时器

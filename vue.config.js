@@ -46,7 +46,7 @@ module.exports = {
             patterns: [
                 require('path').resolve('./src/assets/less/color.less'),
                 require('path').resolve('./src/assets/less/layout.less'),
-                require('path').resolve('./src/assets/iconfont.css'),
+                require('path').resolve('./src/assets/icon/iconfont.css'),
             ]
         }
     }

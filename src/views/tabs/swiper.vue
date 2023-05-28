@@ -5,7 +5,7 @@
             <a-icon type="right-circle" slot="next" />
 
             <div class="item" slot="slide" v-for="(item, index) in list" :key="index">
-                <img :src="item.img" :alt="index">
+                <img v-lazy="item.img" :alt="index">
                 <div class="del" @click.stop="bindDel(index)">删除</div>
             </div>
 
@@ -31,8 +31,8 @@ export default {
     data() {
         return {
             list: [
-                { id: 1, img: require('@/assets/images/swiper/1.jpg') },
-                { id: 2, img: require('@/assets/images/swiper/2.jpg') },
+                { id: 1, img: require('@/assets/img/swiper/1.jpg') },
+                { id: 2, img: require('@/assets/img/swiper/2.jpg') },
             ]
         }
     },

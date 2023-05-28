@@ -7,77 +7,45 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/home.vue'),
+    component: () => import(/* webpackChunkName: "home" */ '../views/tabs/index.vue'),
     meta: {title: '绍兴市公安局刑侦支队'},
     redirect: 'form',
     children: [
       {
         path: 'form',
         name: 'form',
-        component: () => import(/* webpackChunkName: "form" */ '../views/tabsPage/form.vue'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/tabs/form.vue'),
         meta: {title: '主面'}
       },
       {
         path: 'DragScale',
         name: 'DragScale',
-        component: () => import(/* webpackChunkName: "DragScale" */ '../views/tabsPage/DragScale.vue'),
+        component: () => import(/* webpackChunkName: "DragScale" */ '../views/tabs/DragScale.vue'),
         meta: {title: '中央空调监控系统'}
       },
       {
         path: 'list',
         name: 'list',
-        component: () => import(/* webpackChunkName: "list" */ '../views/tabsPage/list.vue'),
+        component: () => import(/* webpackChunkName: "list" */ '../views/tabs/list.vue'),
         meta: {title: '列表'}
       },
       {
         path: 'swiper',
         name: 'swiper',
-        component: () => import(/* webpackChunkName: "swiper" */ '../views/tabsPage/swiper.vue'),
+        component: () => import(/* webpackChunkName: "swiper" */ '../views/tabs/swiper.vue'),
         meta: {title: '轮播图'}
       },
       {
-        path: 'Temperature',
-        name: 'Temperature',
-        component: () => import(/* webpackChunkName: "Temperature" */ '../views/tabsPage/Temperature.vue'),
-        meta: {title: '温湿度压差'}
-      },
-      {
-        path: 'headlamp',
-        name: 'headlamp',
-        component: () => import(/* webpackChunkName: "headlamp" */ '../views/tabsPage/headlamp.vue'),
-        meta: {title: '照明灯'}
-      },
-      {
-        path: 'ModularMachine',
-        name: 'ModularMachine',
-        component: () => import(/* webpackChunkName: "ModularMachine" */ '../views/tabsPage/ModularMachine.vue'),
-        meta: {title: '模块机'}
-      },
-      {
-        path: 'AlarmRecord',
-        name: 'AlarmRecord',
-        component: () => import(/* webpackChunkName: "AlarmRecord" */ '../views/tabsPage/AlarmRecord.vue'),
-        meta: {title: '报警记录'}
-      },
-      {
-        path: 'GermicidalLamp',
-        name: 'GermicidalLamp',
-        component: () => import(/* webpackChunkName: "GermicidalLamp" */ '../views/tabsPage/GermicidalLamp.vue'),
-        meta: {title: '杀菌灯'}
-      },
-      {
-        path: 'UserLogin',
-        name: 'UserLogin',
-        component: () => import(/* webpackChunkName: "UserLogin" */ '../views/tabsPage/UserLogin.vue'),
-        meta: {title: '用户登录'}
+        path: 'svg',
+        name: 'svg',
+        component: () => import(/* webpackChunkName: "svg" */ '../views/tabs/svg.vue'),
       },
     ]
   },
   {
-    path: '/404',
-    name: '404',
-    component: () => import(/* webpackChunkName: "404" */ '../views/404.vue'),
-    meta: { title: '404' }
+    path: '/shop',
+    name: 'shop',
+    component: () => import(/* webpackChunkName: "shop" */ '../views/shop/index.vue'),
   },
 ];
 
@@ -92,8 +60,12 @@ const router = new VueRouter({
 
 /* 路由拦截 */
 router.beforeEach((to, from, next) => {
-  if (to.matched.length === 0) next('/404')
-  else next()
+  if (to.matched.length === 0) {
+    alert("路由错误，没有找到页面，跳转失败。");
+    next(from);
+  } else {
+    next();
+  }
 })
 
 export default router

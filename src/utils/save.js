@@ -10,6 +10,7 @@ export function debounce(fn, delay) {
         }, delay);
     };
 }
+
 // 节流:触发函数事件后，短时间间隔内无法连续调用，只有上一次函数执行后，过了规定的时间间隔，才能进行下一次的函数调用。
 export function throttle(fn, interval) {
     let last = null, timer = null, interval = interval || 200;

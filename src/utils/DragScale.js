@@ -1,3 +1,4 @@
+/* 拖拽和缩放封装 */
 function DragScale(o) {
     o = o || {};
     this.b = o.b || document.querySelector('html'); // 滑动范围
