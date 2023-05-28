@@ -31,8 +31,8 @@ export default {
     data() {
         return {
             list: [
+                { id: 2, img: require('@/assets/img/swiper/2.jpeg') },
                 { id: 1, img: require('@/assets/img/swiper/1.jpg') },
-                { id: 2, img: require('@/assets/img/swiper/2.jpg') },
             ]
         }
     },

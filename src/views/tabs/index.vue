@@ -1,20 +1,20 @@
 <template>
-    <div class="view_home">
+    <div class="tabs-index-page">
         <!-- 头部标题-->
         <tab-header :cfig="headConfig" />
 
-        <router-view class="tab_page_view" />
+        <router-view class="router-view" />
 
         <!-- 底部导航 -->
-        <div class="tab_body">
+        <div class="tab-list">
             <TabItem class="tab-item" v-for="e in tabList" :key="e.title" :cfig="e" :tabId="tabId" @bindTab="bindTab"/>
         </div>
     </div>
 </template>
 
 <script>
-import TabItem from '@/components/list/tab_item.vue'
-import TabHeader from '@/components/header/index.vue'
+import TabItem from './com/tab_item.vue'
+import TabHeader from './com/index-page-head.vue'
 export default {
     components: {
         TabItem,
@@ -33,6 +33,7 @@ export default {
                 {id: 'list', title: '滚动列表', icon: 'icon-a-3AHU01kongtiao'},
                 {id: 'swiper', title: '轮播图', icon: 'icon-a-3AHU01kongtiao'},
                 {id: 'svg', title: 'svg', icon: 'icon-a-7zhaomingdeng'},
+                {id: 'shopping', title: '抛物线', icon: 'icon-a-7zhaomingdeng'},
                 {id: 'shop', title: '商店', icon: 'icon-a-7zhaomingdeng'},
             ]
         },
@@ -49,7 +50,7 @@ export default {
             }
             return {
                 list,
-                title: 'DNA实验室集中监控系统',
+                title: 'VUE2模板搭建',
                 userInfo: {
                     name: '王二'
                 }
@@ -76,30 +77,27 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.view_home{
-    // width: 1920px;
-    // height: 1008px;
-    width: 100%;
+.tabs-index-page{
     min-height: 100vh;
     background: rgb(0, 8, 63);
     color: #fff;
 }
 
-.tab_page_view{
-    height: calc(100vh - 230px);
-}
-
-.tab_body{
+.tab-list{
     display: flex;
-    justify-content: space-between;
-    padding: 10px 20px 0 20px;
+    justify-content: center;
+    margin-top: 15px;
     > .tab-item{
-        margin-left: 5px;
-        // width: calc((100% - 5px * 12) / 13 );
-        flex: 1;
-        &:nth-child(1) {
+        margin-left: 20px;
+        &:first-child{
             margin-left: 0;
         }
     }
 }
+
+.router-view{
+    min-height: calc(100vh - 230px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 </style>

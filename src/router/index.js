@@ -40,6 +40,12 @@ const routes = [
         name: 'svg',
         component: () => import(/* webpackChunkName: "svg" */ '../views/tabs/svg.vue'),
       },
+      {
+        path: 'shopping',
+        name: 'shopping',
+        component: () => import(/* webpackChunkName: "shopping" */ '../views/tabs/shopping.vue'),
+        meta: {title: '抛物线'}
+      },
     ]
   },
   {

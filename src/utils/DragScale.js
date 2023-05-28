@@ -4,7 +4,7 @@ function DragScale(o) {
     this.b = o.b || document.querySelector('html'); // 滑动范围
     this.t = o.t || document.querySelector('body'); // 滑动内容
 
-    this.drag({
+    if(o.type === 'drag' || !o.type) this.drag({
         oBox: this.t,
         tBox: this.t,
         change: o => {
@@ -14,10 +14,10 @@ function DragScale(o) {
             o.target.style.top = `${o.y}px`
         }
     })
-    this.scale({
+    if(o.type === 'scale' || !o.type) this.scale({
         oBox: this.t,
         tBox: this.t,
-        minScale: 0.5,
+        minScale: 0.2,
         maxScale: 5,
         change: o => {
             o.target.style.position = 'relative'

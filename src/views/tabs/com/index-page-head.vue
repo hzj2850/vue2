@@ -68,7 +68,7 @@ export default {
 .com_head_index{
     height: 100px;
     width: 100%;
-    background-image: url(../../assets/img/bg-top@2x.png);
+    background-image: url(./img/tab-head.png);
     background-size: 100% 100%;
     position: relative;
     padding: 0 20px;

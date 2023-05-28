@@ -14,3 +14,9 @@ export default {
     },
 }
 </script>
+
+<style lang="less" scoped>
+.my_btn_1 {
+    margin: 30px;
+}
+</style>
