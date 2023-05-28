@@ -64,9 +64,7 @@ export default {
     },
     data() {
         return {
-            form: {
-                imgs: []
-            },
+            form: {},
             rules: {
                 selectId: [{ required: true, message: '下拉框必选', trigger: 'change' }],
                 date: [{ required: true, message: '日历必须', trigger: 'change' }],
@@ -103,6 +101,7 @@ export default {
         },
         // 清空
         resetForm() {
+            this.form = {};
             this.$refs.ruleForm.resetFields();
             this.$userApi.getUserInfo({
                 name: '王二'
@@ -117,7 +116,11 @@ export default {
             return this.$userApi.fastmock({
                 name: '王二'
             }, {loading: true}).then(res => {
-                this.form.imgs.push(res);
+                if(this.form.imgs) {
+                    this.form.imgs.push(res);
+                } else {
+                    this.form = {...this.form, imgs: [res]};
+                }
                 console.log('上传成功', o, res);
             });
         },
