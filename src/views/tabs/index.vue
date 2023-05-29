@@ -34,7 +34,7 @@ export default {
             const route = this.$router.options.routes.find(o => o.name === 'tabs') || {};
             const children = route.children || [];
             return children.map(e => {
-                return {id: e.name, title: (e.meta || {}).title}
+                return {id: e.name, title: (e.meta || {}).title, icon: (e.meta || {}).icon}
             });
         },
         // 头部配置

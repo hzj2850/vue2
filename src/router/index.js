@@ -15,37 +15,37 @@ const routes = [
         path: 'form',
         name: 'form',
         component: () => import(/* webpackChunkName: "form" */ '../views/tabs/form.vue'),
-        meta: {title: '表单验证'}
+        meta: {title: '表单验证', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
         path: 'DragScale',
         name: 'DragScale',
         component: () => import(/* webpackChunkName: "DragScale" */ '../views/tabs/DragScale.vue'),
-        meta: {title: '缩放/拖拽'}
+        meta: {title: '缩放/拖拽', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
         path: 'list',
         name: 'list',
         component: () => import(/* webpackChunkName: "list" */ '../views/tabs/list.vue'),
-        meta: {title: '列表组件'}
+        meta: {title: '列表组件', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
         path: 'swiper',
         name: 'swiper',
         component: () => import(/* webpackChunkName: "swiper" */ '../views/tabs/swiper.vue'),
-        meta: {title: '轮播图组件'}
+        meta: {title: '轮播图组件', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
         path: 'svg',
         name: 'svg',
         component: () => import(/* webpackChunkName: "svg" */ '../views/tabs/svg.vue'),
-        meta: {title: 'SVG组件'}
+        meta: {title: 'SVG组件', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
         path: 'shopping',
         name: 'shopping',
         component: () => import(/* webpackChunkName: "shopping" */ '../views/tabs/shopping.vue'),
-        meta: {title: '抛物线'}
+        meta: {title: '抛物线', icon: 'icon-a-3AHU01kongtiao'}
       },
     ]
   },
@@ -53,11 +53,13 @@ const routes = [
     path: '/shop',
     name: 'shop',
     component: () => import(/* webpackChunkName: "shop" */ '../views/shop/index.vue'),
+    meta: {title: '商品列表', keepAlive: true}
   },
   {
     path: '/shop-details',
     name: 'shopDetails',
     component: () => import(/* webpackChunkName: "shopDetails" */ '../views/shop/details.vue'),
+    meta: {title: '商品详情'}
   },
 ];
 
