@@ -1,0 +1,54 @@
+/* -------------------动画一----------------start */
+.v-enter, .v-leave-to {
+    opacity: 0;
+    transform: translateY(50%) scale(0.2);
+}
+.v-enter-active, .v-leave-active {
+    transition: all 400ms ease;
+}
+.v-move {
+    transition: all 1s ease;
+}
+.v-leave-active {
+    position: absolute;
+    width: 80%;
+}
+/* -------------------动画一----------------end */
+
+/* -------------------动画二----------------start */
+.slide-enter, .slide-leave-to {
+    z-index: 4;
+}
+.slide-leave, .slide-enter-to {
+    z-index: -1;
+}
+.slide-enter-active {
+    animation: slide-in 500ms ease-out;
+}
+.slide-leave-active {
+    animation: slide-out 300ms ease-out;
+    position: absolute;
+    width: calc(100% - 10px);
+}
+/* 想要让动画平滑一点，需要加v-move的类名，v-可以别name的值 */
+.slide-move {
+    transition: all 500ms;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(100%) scale(0.5);
+    }
+    to {
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(50%) scale(0.5);
+    }
+}
+/* -------------------动画二----------------end */

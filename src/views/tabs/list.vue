@@ -1,7 +1,7 @@
 <template>
     <div>
       <a-button @click="bindAdd()">添加数据</a-button>
-      <my-list :columns="head" :data="list" @click="bindItem">
+      <my-list :columns="head" :data="list" transition="v" @click="bindItem">
         <template slot="order" slot-scope="item,index">
           {{ index }}
         </template>
@@ -66,7 +66,10 @@ export default {
     }
   }
   /deep/ .my-list-body{
-    line-height: 50px;
+    line-height: 70px;
+    .col::before{
+      border-color: rgba(255, 255, 255, 0.1);
+    }
   }
 }
 </style>

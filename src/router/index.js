@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import(/* webpackChunkName: "home" */ '../views/tabs/index.vue'),
-    meta: {title: '绍兴市公安局刑侦支队'},
+    meta: {title: 'ant二次封装模块'},
     redirect: 'form',
     children: [
       {
@@ -52,6 +52,11 @@ const routes = [
     path: '/shop',
     name: 'shop',
     component: () => import(/* webpackChunkName: "shop" */ '../views/shop/index.vue'),
+  },
+  {
+    path: '/shop-details',
+    name: 'shopDetails',
+    component: () => import(/* webpackChunkName: "shopDetails" */ '../views/shop/details.vue'),
   },
 ];
 

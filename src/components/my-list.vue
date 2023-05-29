@@ -85,8 +85,8 @@ export default {
                 position: absolute;
                 left: 0;
                 top: 50%;
-                transform: translate(-50%, -50%);
-                border-left: 1px solid #999;
+                transform: translateY(-50%);
+                border-left: 1px solid rgba(0, 0, 0, 0.5);
                 width: 0;
                 height: 70%;
             }
