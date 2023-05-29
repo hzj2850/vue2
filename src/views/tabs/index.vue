@@ -25,21 +25,17 @@ export default {
         }
     },
     computed: {
-        // 底部导航
-        tabList() {
-            return [
-                {id: 'form', title: '表单校验', icon: 'icon-a-1xitongzhuye'},
-                {id: 'DragScale', title: '缩放/拖拽', icon: 'icon-a-2zongkonghuamian'},
-                {id: 'list', title: '滚动列表', icon: 'icon-a-3AHU01kongtiao'},
-                {id: 'swiper', title: '轮播图', icon: 'icon-a-3AHU01kongtiao'},
-                {id: 'svg', title: 'svg', icon: 'icon-a-7zhaomingdeng'},
-                {id: 'shopping', title: '抛物线', icon: 'icon-a-7zhaomingdeng'},
-                {id: 'shop', title: '商店', icon: 'icon-a-7zhaomingdeng'},
-            ]
-        },
         // 底部已经选中的导航
         tabId() {
             return this.$route.name
+        },
+        // 底部导航
+        tabList() {
+            const route = this.$router.options.routes.find(o => o.name === 'tabs') || {};
+            const children = route.children || [];
+            return children.map(e => {
+                return {id: e.name, title: (e.meta || {}).title}
+            });
         },
         // 头部配置
         headConfig() {

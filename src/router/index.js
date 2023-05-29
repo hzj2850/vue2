@@ -6,39 +6,40 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'tabs',
     component: () => import(/* webpackChunkName: "home" */ '../views/tabs/index.vue'),
-    meta: {title: 'ant二次封装模块'},
+    meta: {title: '二次封装模块'},
     redirect: 'form',
     children: [
       {
         path: 'form',
         name: 'form',
         component: () => import(/* webpackChunkName: "form" */ '../views/tabs/form.vue'),
-        meta: {title: '主面'}
+        meta: {title: '表单验证'}
       },
       {
         path: 'DragScale',
         name: 'DragScale',
         component: () => import(/* webpackChunkName: "DragScale" */ '../views/tabs/DragScale.vue'),
-        meta: {title: '中央空调监控系统'}
+        meta: {title: '缩放/拖拽'}
       },
       {
         path: 'list',
         name: 'list',
         component: () => import(/* webpackChunkName: "list" */ '../views/tabs/list.vue'),
-        meta: {title: '列表'}
+        meta: {title: '列表组件'}
       },
       {
         path: 'swiper',
         name: 'swiper',
         component: () => import(/* webpackChunkName: "swiper" */ '../views/tabs/swiper.vue'),
-        meta: {title: '轮播图'}
+        meta: {title: '轮播图组件'}
       },
       {
         path: 'svg',
         name: 'svg',
         component: () => import(/* webpackChunkName: "svg" */ '../views/tabs/svg.vue'),
+        meta: {title: 'SVG组件'}
       },
       {
         path: 'shopping',
