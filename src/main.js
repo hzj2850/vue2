@@ -10,6 +10,10 @@ import store from './store/index'
 import Antd from './utils/setting/ant'
 Vue.use(Antd);
 
+// 加载中动画 this.$loading();
+import Loading from './components/loading/index'
+Vue.use(Loading);
+
 // 轮播图、图片懒加载
 import Viewer from './utils/setting/v-viewer'
 import VLazy from './utils/setting/vLazy'

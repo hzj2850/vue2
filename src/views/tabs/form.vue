@@ -101,11 +101,13 @@ export default {
         },
         // 清空
         resetForm() {
+            this.$loading({ text: '文件上传中' });
             this.form = {};
             this.$refs.ruleForm.resetFields();
-            this.$userApi.getUserInfo({
+            this.$userApi.fastmock({
                 name: '王二'
             }).then(res => {
+                this.$loading(false);
                 console.log('请求相应：' ,res)
             })
         },
