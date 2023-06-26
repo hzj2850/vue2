@@ -1,32 +1,6 @@
 /* 拖拽和缩放封装 */
 function DragScale(o) {
-    o = o || {};
-    this.b = o.b || document.querySelector('html'); // 滑动范围
-    this.t = o.t || document.querySelector('body'); // 滑动内容
-
-    if(o.type === 'drag' || !o.type) this.drag({
-        oBox: this.t,
-        tBox: this.t,
-        change: o => {
-            o.target.style.position = 'relative'
-            o.target.style.userSelect = 'none'
-            o.target.style.left = `${o.x}px`
-            o.target.style.top = `${o.y}px`
-        }
-    })
-    if(o.type === 'scale' || !o.type) this.scale({
-        oBox: this.t,
-        tBox: this.t,
-        minScale: 0.2,
-        maxScale: 5,
-        change: o => {
-            o.target.style.position = 'relative'
-            o.target.style.userSelect = 'none'
-            o.target.style.left = o.x + 'px'
-            o.target.style.top = o.y + 'px'
-            o.target.style.transform = 'scale(' + o.scale + ')'
-        }
-    })
+    
 }
 
 /*
@@ -37,7 +11,8 @@ function DragScale(o) {
  */
 DragScale.prototype.drag = function (cfig = {}) {
     const b = cfig.oBox || document.querySelector('html'),
-        t = cfig.tBox || document.querySelector('body');
+        t = cfig.tBox || document.querySelector('body'),
+        d = cfig.target || b;
     let ol = 0, ot = 0;
     const f = e => {
         e = e || window.event;
@@ -51,7 +26,7 @@ DragScale.prototype.drag = function (cfig = {}) {
         this.removeEvent(b, 'mouseup', fr);
         this.removeEvent(b, 'mouseleave', fr);
     }
-    this.addEvent(b, 'mousedown', e => {
+    this.addEvent(d, 'mousedown', e => {
         e = e || window.event;
         ol = parseFloat(t.style.left || 0) - e.clientX;
         ot = parseFloat(t.style.top || 0) - e.clientY;

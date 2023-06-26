@@ -1,7 +1,6 @@
 <script>
 export default {
     render() {
-        console.log(this,'jjjjjjjjj')
         const o = {
             class: {
                 'my-loading-com': true,

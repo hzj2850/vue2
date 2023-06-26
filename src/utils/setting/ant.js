@@ -124,8 +124,6 @@ const importAntd = Vue => {
   // Vue.prototype.$success = Modal.success
   // Vue.prototype.$error = Modal.error
   // Vue.prototype.$warning = Modal.warning
-
-  process.env.NODE_ENV !== 'production' && console.warn('ant design use lazy-load !')
 }
 
 export default importAntd
