@@ -1,10 +1,16 @@
 <script>
 import DragScale from '@/utils/DragScale'
 export default {
+    data() {
+        return {
+            hover: false,
+        }
+    },
     render() {
         const a = {
             class: {
-                'y-bar': true
+                'y-bar': true,
+                'bar-hover': this.hover
             },
             style: {
                 width: this.$attrs.show ? undefined : 0,
@@ -20,11 +26,17 @@ export default {
             }
         }
         const l = {
+            class: {
+                'bar_end': this.$attrs.left === 0
+            },
             on: {
                 click: () => this.bindClick('l'),
             }
         }
         const r = {
+            class: {
+                'bar_end': this.$attrs.left === this.getBar()
+            },
             on: {
                 click: () => this.bindClick('r'),
             }
@@ -42,6 +54,7 @@ export default {
     },
     methods: {
         getBar() {
+            if(!this.$refs.bar) return 0;
             return this.$refs.bar.clientWidth - this.$refs.box.offsetWidth;
         },
         // 拖动
@@ -51,6 +64,8 @@ export default {
                 tBox: this.$refs.box,
                 target: this.$refs.box,
                 change: e => this.$emit('call', e),
+                down: () => this.hover = true,
+                up: () => this.hover = false,
             })
         },
         // 左右滑动按钮
@@ -66,15 +81,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('./bar.less');
 .y-bar{
-    position: absolute;
-    z-index: 999;
     left: 0;
     bottom: 0;
     width: 90%;
     display: flex;
     align-items: center;
-    overflow: hidden;
     > div{
         flex: 1;
         height: 2px;
@@ -90,14 +103,6 @@ export default {
             top: 50%;
             transform: translateY(-50%);
         }
-    }
-
-    > span{
-        width: 20px;
-        height: 20px;
-        background: red;
-        display: inline-block;
-        background: pink;
     }
 }
 </style>

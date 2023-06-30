@@ -86,8 +86,8 @@ export default {
         // 滚动监听
         bindScroll(e) {
             const r = this.$refs, xBar = r.xBar, yBar = r.yBar;
-            this.xo.left = parseInt(e.scrollLeft / (e.scrollWidth - e.clientWidth) * xBar.getBar());
-            this.yo.top = parseInt(e.scrollTop / (e.scrollHeight - e.clientHeight) * yBar.getBar());
+            this.xo.left = Math.ceil(e.scrollLeft / (e.scrollWidth - e.clientWidth) * xBar.getBar());
+            this.yo.top = Math.ceil(e.scrollTop / (e.scrollHeight - e.clientHeight) * yBar.getBar());
         },
         // 滑动滑块，设置滚动条位置
         setXY(v = 0, t = 'x') {

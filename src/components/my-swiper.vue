@@ -4,7 +4,9 @@ import "swiper/dist/idangerous.swiper.css";
 export default {
     props: {
         list: {
-            type: Array
+            type: Array,
+            require: true,
+            default: () => ([])
         },
         tip: {
             type: String,
@@ -15,7 +17,7 @@ export default {
         return {
             mySwiper: null,
             total: 0, // 总数
-            activeIndex: 0, // 当前显示的下标
+            i: 1, // 当前显示的下标 + 1
             oldData: [], // list 的旧数据
         }
     },
@@ -53,12 +55,12 @@ export default {
         }
     },
     render() {
-        const attrs = this.$attrs;
+        const attrs = this.$attrs, idx = this.i;
         // 上一页
         const Prev = {
             class: {
                 prev: true,
-                no_prev: (attrs.loop === false && this.activeIndex == 0) || this.total === 0,
+                no_prev: attrs.loop || idx === 1,
             },
             on: {
                 click: () => this.mySwiper.swipePrev()
@@ -68,7 +70,7 @@ export default {
         const Next = {
             class: {
                 next: true,
-                no_next: (attrs.loop === false && this.activeIndex + 1 === this.total) || this.total === 0,
+                no_next: attrs.loop || idx === (this.total - (attrs.slidesPerView || 1) + 1),
             },
             on: {
                 click: () => this.mySwiper.swipeNext()
@@ -76,10 +78,10 @@ export default {
         }
         
         // 轮播图slide列表
-        const slidCfig = {
+        const slide = {
             class: {'swiper-slide': true, 'swiper-no-swiping': true}
         }
-        const slides = this.$slots.slide ? this.$slots.slide.map(slot => <div {...slidCfig}>{ slot }</div>) : this.$slots.default;
+        const slides = this.list.length ? this.list.map((e,i) => <div {...slide}>{ this.$scopedSlots.slide ? this.$scopedSlots.slide(e, i) : 'slot="slide"' }</div>) : this.$slots.default;
         
         return (
             <div class="my-swiper">
@@ -91,7 +93,7 @@ export default {
                 <div class="pagination" />
                 <div {...Prev}>{ this.$scopedSlots.prev ? this.$scopedSlots.prev() : 'prev' }</div>
                 <div {...Next}>{ this.$scopedSlots.next ? this.$scopedSlots.next() : 'next' }</div>
-                <div class="total-tip" domPropsInnerHTML={this.total ? this.tip.replace('index', this.activeIndex + 1).replace('total', this.total) : ''} />
+                <div class="total-tip" domPropsInnerHTML={(this.total && this.tip) ? this.tip.replace('index', idx).replace('total', this.total) : ''} />
             </div>
         )
     },
@@ -99,23 +101,20 @@ export default {
         // 参数配置：https://2.swiper.com.cn/api/basic/2014/1213/18.html
         const that = this;
         this.mySwiper = new Swiper('.swiper-container',{
-            autoplay: 5000, // 自动切换的时间间隔（单位ms）
-            loop: true, // 开启循环
-            mode: 'horizontal', // 设置水平(horizontal)或垂直(vertical)
-            slidesPerView: 1, // 设置slider容器能够同时显示的slides数量
-            noSwiping: false, // 设为true时，可以在slide上增加类名'swiper-no-swiping'，使该slide无法滑动
-            initialSlide: 0, // 设定初始化时slide的索引
-            // 当Swiper初始化完成，loop，pagination，等其他参数或方法生成之后执行
+            // autoplay: 5000, // 自动切换的时间间隔（单位ms）
+            // loop: false, // 开启循环
+            // mode: 'horizontal', // 水平horizontal 垂直vertical
+            // slidesPerView: 1, // 同时显示的slides数量
+            // noSwiping: false, // 设为true时，可以在slide上增加类名'swiper-no-swiping'，使该slide无法滑动
+            // initialSlide: 0, // 设定初始化时slide的索引
+            pagination: '.pagination',
+            paginationClickable: true,
             onSwiperCreated: function(s) {
+                that.i = s.activeLoopIndex + 1;
                 that.total = s.slides.length;
             },
-            // slider切换结束时执行。free模式下无效
-            onSlideChangeEnd: function(s) {
-                that.activeIndex = s.activeIndex;
-            },
-
-            pagination: '.pagination', // 分页器
-            paginationClickable: true, // 值为true时，点击分页器的指示点时会发生Swiper
+            onSlideChangeEnd: e => that.i = e.activeLoopIndex + 1,
+            onTouchEnd: e => that.i = e.activeLoopIndex + 1,
             ...this.$attrs,
         })
     },
@@ -133,7 +132,6 @@ export default {
     width: 400px;
 }
 .swiper-container{
-    border: 1px solid red;
     height: 100%;
     margin: 0;
 }

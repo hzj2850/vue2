@@ -1,5 +1,5 @@
 /* 拖拽和缩放封装 */
-function DragScale(o) {
+function DragScale() {
     
 }
 
@@ -22,6 +22,7 @@ DragScale.prototype.drag = function (cfig = {}) {
         return false;
     }
     const fr = () => {
+        cfig.up && cfig.up();
         this.removeEvent(b, 'mousemove', f);
         this.removeEvent(b, 'mouseup', fr);
         this.removeEvent(b, 'mouseleave', fr);
@@ -30,6 +31,7 @@ DragScale.prototype.drag = function (cfig = {}) {
         e = e || window.event;
         ol = parseFloat(t.style.left || 0) - e.clientX;
         ot = parseFloat(t.style.top || 0) - e.clientY;
+        cfig.down && cfig.down({x: ol, y: ot});
 
         this.addEvent(b, 'mousemove', f);
         this.addEvent(b, 'mouseup', fr);

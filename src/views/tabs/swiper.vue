@@ -4,7 +4,7 @@
             <a-icon type="left-circle" slot="prev" />
             <a-icon type="right-circle" slot="next" />
 
-            <div class="item" slot="slide" v-for="(item, index) in list" :key="index">
+            <div class="item" slot="slide" slot-scope="item, index">
                 <img v-lazy="item.img" :alt="index">
                 <div class="del" @click.stop="bindDel(index)">删除</div>
             </div>
@@ -55,6 +55,7 @@ export default {
     height: 60vh;
     width: 80vw;
     margin: 0 auto;
+    border: 1px solid red;
 }
 .item{
     width: 100%;
@@ -75,7 +76,9 @@ export default {
     }
 }
 /deep/ .no-list{
-    text-align: center;
-    line-height: 100px;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

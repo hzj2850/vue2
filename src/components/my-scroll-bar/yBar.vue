@@ -1,10 +1,16 @@
 <script>
 import DragScale from '@/utils/DragScale'
 export default {
+    data() {
+        return {
+            hover: false,
+        }
+    },
     render() {
         const a = {
             class: {
-                'y-bar': true
+                'y-bar': true,
+                'bar-hover': this.hover
             },
             style: {
                 width: this.$attrs.show ? undefined : 0,
@@ -20,11 +26,17 @@ export default {
             }
         }
         const l = {
+            class: {
+                'bar_end': this.$attrs.top === 0
+            },
             on: {
                 click: () => this.bindClick('t'),
             }
         }
         const r = {
+            class: {
+                'bar_end': this.$attrs.top === this.getBar()
+            },
             on: {
                 click: () => this.bindClick('b'),
             }
@@ -42,6 +54,7 @@ export default {
     },
     methods: {
         getBar() {
+            if(!this.$refs.bar) return 0;
             return this.$refs.bar.clientHeight - this.$refs.box.offsetHeight;
         },
         // 拖动
@@ -51,6 +64,8 @@ export default {
                 tBox: this.$refs.box,
                 target: this.$refs.box,
                 change: e => this.$emit('call', e),
+                down: () => this.hover = true,
+                up: () => this.hover = false,
             })
         },
         // 左右滑动按钮
@@ -66,16 +81,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import url('./bar.less');
 .y-bar{
-    position: absolute;
-    z-index: 999;
     right: 0;
     top: 0;
     height: 90%;
-    display: flex;
     flex-direction: column;
+    display: flex;
     align-items: center;
-    overflow: hidden;
     > div{
         flex: 1;
         width: 2px;
@@ -91,14 +104,6 @@ export default {
             top: 0;
             transform: translateX(-50%);
         }
-    }
-
-    > span{
-        width: 20px;
-        height: 20px;
-        background: red;
-        display: inline-block;
-        background: pink;
     }
 }
 </style>
