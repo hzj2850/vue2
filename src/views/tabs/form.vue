@@ -68,14 +68,14 @@ export default {
         }
     },
     mounted() {
-        // setTimeout(() => {
-        //     this.form = { 
-        //         date: "2023-03-26 13:40:58", 
-        //         startTime: "2023-03-18 15:06:23", 
-        //         endTime: "2023-04-14 15:06:23",
-        //         selectId: 3 
-        //     };
-        // }, 300);
+        setTimeout(() => {
+            this.form = { 
+                date: "2023-03-26 13:40:58", 
+                startTime: "2023-03-18 15:06:23", 
+                endTime: "2023-04-14 15:06:23",
+                selectId: 3 
+            };
+        }, 300);
     },
     methods: {
         // 提交
@@ -98,6 +98,7 @@ export default {
             // data.append("file", o.file);
             // data.append("type", 1);
             this.$loading('上传中');
+            console.log('上传图片：',o);
             return this.$userApi.fastmock().then(res => {
                 this.$loading(false);
                 if(this.form.imgs) {

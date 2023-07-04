@@ -14,7 +14,7 @@
             </div>
         </MySwiper>
 
-        <MyUpload style="margin-top: 30px;" :upload="upload">
+        <MyUpload style="margin-top: 30px;" :upload="upload" :multiple="true">
             <a-button>上传图片（{{ list.length }}）</a-button>
         </MyUpload>
     </div>

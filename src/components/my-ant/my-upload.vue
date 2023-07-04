@@ -9,16 +9,18 @@ export default {
     },
     render() {
         const nodes = Object.keys(this.$slots).map(name => (<slot slot={name}>{this.$slots[name]}</slot>))
-        const props = {
-            fileList: [],
-            customRequest: this.customRequest,
-            ...this.$attrs,
+        const o = {
+            props: {
+                fileList: [],
+                customRequest: this.customRequest,
+                ...this.$attrs,
+            },
+            on: {
+                ...this.$listeners,
+                change: function(){}, // 阻止触发表单验证
+            }
         }
-        const on = {
-            ...this.$listeners,
-            change: function(){}, // 阻止触发表单验证
-        }
-        return <a-upload-dragger on={on} props={props} class="my-upload">{ nodes }</a-upload-dragger>
+        return <a-upload-dragger {...o} class="my-upload">{ nodes }</a-upload-dragger>
     },
     methods: {
         customRequest(o) {

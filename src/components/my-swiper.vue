@@ -70,7 +70,7 @@ export default {
         const Next = {
             class: {
                 next: true,
-                no_next: attrs.loop || idx === (this.total - (attrs.slidesPerView || 1) + 1),
+                no_next: attrs.loop || idx === (this.total - (attrs.slidesPerView || 1) + 1) || this.total === 0,
             },
             on: {
                 click: () => this.mySwiper.swipeNext()
