@@ -45,6 +45,7 @@ export default {
     /deep/ .ant-form-item{
         margin-bottom: 20px;
         line-height: 45px;
+        font-size: inherit;
         .ant-form-explain{
             position: absolute;
             left: 0;
@@ -52,6 +53,10 @@ export default {
         }
         .ant-form-item-label{
             line-height: unset;
+            > label{
+                color: inherit;
+                font-size: inherit;
+            }
         }
         .ant-form-item-control{
             line-height: unset;

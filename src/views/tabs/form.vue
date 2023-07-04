@@ -38,13 +38,15 @@ export default {
             cfig: {
                 selectId: {
                     props: {
-                        label: '11111111',
+                        label: '姓名',
+                        labelAlign: 'left',
                     },
                     class: {
                         'data-type': true
                     },
                     style: {
                         'border': '1px solid blue',
+                        'color': '#fff',
                     }
                 },
                 imgs: {
@@ -78,11 +80,11 @@ export default {
     methods: {
         // 提交
         onSubmit() {
-            this.$refs.form.validate(valid => {
+            this.$refs.form.validate((valid, msg) => {
                 if (valid) {
                     alert('提交成功');
                 } else {
-                    console.log('请完善表单');
+                    alert(msg);
                 }
             });
         },
@@ -114,7 +116,9 @@ export default {
     background: rgba(255,255,255,0.1);
     padding: 30px;
     width: 60%;
+    min-width: 600px;
     margin: auto;
+    font-size: 18px;
 }
 
 .my-upload{

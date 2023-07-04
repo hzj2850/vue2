@@ -37,6 +37,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.has-error{
+    .my-upload{
+        border: 1px solid red;
+
+    }
+}
 .my-upload{
     display: block;
     height: @input-height;
