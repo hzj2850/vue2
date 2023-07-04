@@ -33,7 +33,6 @@ Axios.interceptors.request.use(
 Axios.interceptors.response.use(
     res => {
         if (res.status === 200) {
-            res.data.code !== 200 && alert(res.data.message || '请检查code状态');
             return Promise.resolve(res.data);
         } else {
             return Promise.reject(res.data);

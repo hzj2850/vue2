@@ -1,47 +1,18 @@
 <template>
     <div class="form_page">
         <div>{{ form }}</div>
-
-        <a-form-model ref="ruleForm" :model="form" :rules="rules">
-            <a-form-model-item label="下拉框" prop="selectId">
-                <MySelect v-model="form.selectId" :text.sync="form.selectName" :show-search="true" allowClear></MySelect>
-            </a-form-model-item>
-            <!-- time|date|month|year|decade -->
-            <a-form-model-item label="time" prop="time">
-                <MyDate v-model="form.time" mode="time"></MyDate>
-            </a-form-model-item>
-            <a-form-model-item label="date" prop="date">
-                <MyDate v-model="form.date"></MyDate>
-            </a-form-model-item>
-            <a-form-model-item label="month" prop="month">
-                <MyDate v-model="form.month" mode="month" format="M月" vformat="M"></MyDate>
-            </a-form-model-item>
-            <a-form-model-item label="year" prop="year">
-                <MyDate v-model="form.year" mode="year" format="YYYY年" vformat="YYYY"></MyDate>
-            </a-form-model-item>
-
-            <a-form-model-item label="时间段" prop="startTime">
-                <MyRange v-model="form.startTime" :end.sync="form.endTime"></MyRange>
-            </a-form-model-item>
-            <a-form-model-item label="上传" prop="imgs">
-                <MyUpload :upload="bindUplad">
-                    上传图片
-                </MyUpload>
-            </a-form-model-item>
-        </a-form-model>
+        <my-form ref="form" :model="form" :rules="rules" :cfig="cfig" :hideRequiredMark="true" layout="horizontal" :labelCol="{span: 4}" :wrapperCol="{span: 20}">
+            <MySelect v-model="form.selectId" :text.sync="form.selectName" :show-search="true" allowClear slot="selectId"></MySelect>
+            <MyDate v-model="form.time" slot="time"></MyDate>
+            <MyDate v-model="form.date" slot="date"></MyDate>
+            <MyDate v-model="form.month" mode="month" format="M月" vformat="M" slot="month"></MyDate>
+            <MyDate v-model="form.year" mode="year" format="YYYY年" vformat="YYYY" slot="year"></MyDate>
+            <MyRange v-model="form.startTime" :end.sync="form.endTime" slot="startTime"></MyRange>
+            <MyUpload :upload="bindUplad" slot="imgs">上传图片</MyUpload>
+        </my-form>
 
         <a-button @click="onSubmit()">提交</a-button>
-        <a-button @click="resetForm()">清空</a-button>
-        <a-button @click="$refs.modal.open()">弹框</a-button>
-        <a-button @click="modal = (modal === 'div'?'modal':'div')">弹框{{ modal }}</a-button>
-
-        <MyModal ref="modal" :type="modal" title="弹框">
-            <MyMenu :default-open-keys="['2']" :selected-keys="[current]" mode="inline" @click="bindMenu">
-                <div slot-scope="item">
-                    {{ item.title }}
-                </div>
-            </MyMenu>
-        </MyModal>
+        <a-button @click="resetFields()">清空</a-button>
 
     </div>
 </template>
@@ -51,20 +22,38 @@ import MySelect from '@/components/my-ant/my-select.vue'
 import MyDate from '@/components/my-ant/my-date.vue'
 import MyRange from '@/components/my-ant/my-range.vue'
 import MyUpload from '@/components/my-ant/my-upload.vue'
-import MyModal from '@/components/my-ant/my-modal.vue'
-import MyMenu from '@/components/my-ant/my-menu.vue'
+import MyForm from '../../components/my-ant/my-form.vue'
 export default {
     components: {
         MySelect,
         MyDate,
         MyRange,
         MyUpload,
-        MyModal,
-        MyMenu
+        MyForm,
     },
     data() {
         return {
             form: {},
+            // 样式配置
+            cfig: {
+                selectId: {
+                    props: {
+                        label: '11111111',
+                    },
+                    class: {
+                        'data-type': true
+                    },
+                    style: {
+                        'border': '1px solid blue',
+                    }
+                },
+                imgs: {
+                    props: {
+                        wrapperCol: {span: 24}
+                    }
+                }
+            },
+            // 规则配置
             rules: {
                 selectId: [{ required: true, message: '下拉框必选', trigger: 'change' }],
                 date: [{ required: true, message: '日历必须', trigger: 'change' }],
@@ -74,8 +63,6 @@ export default {
                 startTime: [{ required: true, message: '时间段', trigger: 'change' }],
                 imgs: [{ required: true, message: '图片必填', trigger: 'change' }],
             },
-            modal: 'modal',
-            current: '2-1'
         }
     },
     mounted() {
@@ -91,7 +78,7 @@ export default {
     methods: {
         // 提交
         onSubmit() {
-            this.$refs.ruleForm.validate(valid => {
+            this.$refs.form.validate(valid => {
                 if (valid) {
                     alert('提交成功');
                 } else {
@@ -99,62 +86,35 @@ export default {
                 }
             });
         },
-        // 清空
-        resetForm() {
-            this.$loading({ text: '文件上传中' });
+        resetFields() {
             this.form = {};
-            this.$refs.ruleForm.resetFields();
-            this.$userApi.fastmock({
-                name: '王二'
-            }).then(res => {
-                this.$loading(false);
-                console.log('请求相应：' ,res)
-            })
+            this.$refs.form.resetFields()
         },
+        // 上传图片
         bindUplad(o) {
             // let data = new FormData();
             // data.append("file", o.file);
             // data.append("type", 1);
-            return this.$userApi.fastmock({
-                name: '王二'
-            }, {loading: true}).then(res => {
+            this.$loading('上传中');
+            return this.$userApi.fastmock().then(res => {
+                this.$loading(false);
                 if(this.form.imgs) {
                     this.form.imgs.push(res);
                 } else {
                     this.form = {...this.form, imgs: [res]};
                 }
-                console.log('上传成功', o, res);
             });
         },
-        bindMenu(o) {
-            this.current = o.key;
-        }
     }
 }
 </script>
 
 <style lang="less" scoped>
-.form_page{
-    color: #fff;
-}
-
-.ant-form{
-    width: 50%;
-    margin: 20px auto;
-}
-
-/deep/ .ant-form-item{
-    display: flex;
-    border: 1px solid rgba(250, 220, 220, 0.4);
-    > .ant-form-item-label{
-        width: 100px;
-        > label{
-            color: #fff;
-        }
-    }
-    > .ant-form-item-control-wrapper{
-        flex: 1;
-    }
+.my-form{
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    width: 60%;
+    margin: auto;
 }
 
 .my-upload{
