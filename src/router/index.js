@@ -61,6 +61,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "shopDetails" */ '../views/shop/details.vue'),
     meta: {title: '商品详情'}
   },
+  {
+    path: '/shop-details2',
+    name: 'shopDetails2',
+    component: () => import(/* webpackChunkName: "shopDetails" */ '../views/shop/details2.vue'),
+  },
 ];
 
 const router = new VueRouter({
