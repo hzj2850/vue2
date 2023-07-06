@@ -60,7 +60,7 @@ export default {
         const Prev = {
             class: {
                 prev: true,
-                no_prev: attrs.loop || idx === 1,
+                no_prev: !attrs.loop && idx === 1,
             },
             on: {
                 click: () => this.mySwiper.swipePrev()
@@ -70,7 +70,7 @@ export default {
         const Next = {
             class: {
                 next: true,
-                no_next: attrs.loop || idx === (this.total - (attrs.slidesPerView || 1) + 1) || this.total === 0,
+                no_next: !attrs.loop && (idx === (this.total - (attrs.slidesPerView || 1) + 1) || this.total === 0),
             },
             on: {
                 click: () => this.mySwiper.swipeNext()
@@ -161,8 +161,11 @@ export default {
             margin-left: 0;
         }
     }
+    /deep/ .swiper-visible-switch{
+        background: rgba(255, 255, 255, 0.3);
+    }
     /deep/ .swiper-active-switch {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.6);
     }
 }
 
