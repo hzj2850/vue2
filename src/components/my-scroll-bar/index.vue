@@ -1,7 +1,7 @@
 <script>
 import xBar from './xBar.vue'
 import yBar from './yBar.vue'
-import ResizeObserver from 'resize-observer-polyfill';
+import DragScale from '@/utils/DragScale'
 export default {
     components: {
         xBar,
@@ -65,11 +65,9 @@ export default {
     methods: {
         // 监听可视区变化
         resize() {
-            const ro = new ResizeObserver(() => {
-                this.setSize();
-            });
-            ro.observe(this.$refs.ctx);
-            ro.observe(this.$refs.body);
+            const drag = new DragScale();
+            this.setSize();
+            drag.addEvent(window, 'resize', () => this.setSize());
         },
         // 初始化宽高
         setSize() {
@@ -86,8 +84,8 @@ export default {
         // 滚动监听
         bindScroll(e) {
             const r = this.$refs, xBar = r.xBar, yBar = r.yBar;
-            this.xo.left = Math.ceil(e.scrollLeft / (e.scrollWidth - e.clientWidth) * xBar.getBar());
-            this.yo.top = Math.ceil(e.scrollTop / (e.scrollHeight - e.clientHeight) * yBar.getBar());
+            this.xo.left = Math.round(e.scrollLeft / (e.scrollWidth - e.clientWidth) * xBar.getBar());
+            this.yo.top = Math.round(e.scrollTop / (e.scrollHeight - e.clientHeight) * yBar.getBar());
         },
         // 滑动滑块，设置滚动条位置
         setXY(v = 0, t = 'x') {
