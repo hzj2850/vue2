@@ -82,28 +82,4 @@ export default {
 
 <style lang="less" scoped>
 @import url('./bar.less');
-.y-bar{
-    right: 0;
-    top: 0;
-    height: 90%;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    > div{
-        flex: 1;
-        width: 2px;
-        background: blue;
-        position: relative;
-        > i{
-            display: inline-block;
-            min-height: 20px;
-            width: 10px;
-            background: yellow;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-        }
-    }
-}
 </style>

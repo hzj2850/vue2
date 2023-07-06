@@ -75,17 +75,19 @@ export default {
             if(!b) return;
             this.xo.show = b.clientWidth < b.scrollWidth;
             this.yo.show = b.clientHeight < b.scrollHeight;
-            var w = parseInt(b.clientWidth / c.scrollWidth * xBar.getBar()),
-                h = parseInt(b.clientHeight / c.scrollHeight * yBar.getBar());
-            if(this.xo.show) this.xo.width = w >= 20 ? w : 20;
-            if(this.yo.show) this.yo.height = h >= 20 ? h : 20;
-            this.bindScroll(b);
+            this.$nextTick(function() {
+                var w = parseInt(b.clientWidth / c.scrollWidth * xBar.getBar()),
+                    h = parseInt(b.clientHeight / c.scrollHeight * yBar.getBar());
+                if(this.xo.show) this.xo.width = w >= 20 ? w : 20;
+                if(this.yo.show) this.yo.height = h >= 20 ? h : 20;
+                this.bindScroll(b);
+            });
         },
         // 滚动监听
         bindScroll(e) {
             const r = this.$refs, xBar = r.xBar, yBar = r.yBar;
-            this.xo.left = Math.round(e.scrollLeft / (e.scrollWidth - e.clientWidth) * xBar.getBar());
-            this.yo.top = Math.round(e.scrollTop / (e.scrollHeight - e.clientHeight) * yBar.getBar());
+            this.xo.left = Math.round(Math.ceil(e.scrollLeft) / (e.scrollWidth - e.clientWidth) * xBar.getBar()) || 0;
+            this.yo.top = Math.round(Math.ceil(e.scrollTop) / (e.scrollHeight - e.clientHeight) * yBar.getBar()) || 0;
         },
         // 滑动滑块，设置滚动条位置
         setXY(v = 0, t = 'x') {

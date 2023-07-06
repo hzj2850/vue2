@@ -1,20 +1,64 @@
 .y-bar, .x-bar{
     position: absolute;
     z-index: 999;
-    border: 1px solid yellowgreen;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+    
+    > div{
+        flex: 1;
+        background: blue;
+        position: relative;
+        > i{
+            display: block;
+            background: yellow;
+            position: absolute;
+        }
+    }
 
     > span{
         width: 20px;
         height: 20px;
-        background: red;
         display: inline-block;
         background: pink;
     }
 }
 
+.x-bar{
+    width: calc(100% - 20px);
+    left: 0;
+    bottom: 0;
+    > div{
+        height: 2px;
+        > i{
+            height: 10px;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+.y-bar{
+    height: calc(100% - 20px);
+    right: 0;
+    top: 0;
+    flex-direction: column;
+    > div{
+        width: 2px;
+        > i{
+            width: 10px;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+    }
+}
+
 .bar-hover{
-    background: green;
+    i{
+        background: green !important;
+    }
 }
 
 .bar_end{

@@ -9,7 +9,7 @@ export default {
     render() {
         const a = {
             class: {
-                'y-bar': true,
+                'x-bar': true,
                 'bar-hover': this.hover
             },
             style: {
@@ -82,27 +82,4 @@ export default {
 
 <style lang="less" scoped>
 @import url('./bar.less');
-.y-bar{
-    left: 0;
-    bottom: 0;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    > div{
-        flex: 1;
-        height: 2px;
-        background: blue;
-        position: relative;
-        > i{
-            display: inline-block;
-            min-width: 20px;
-            height: 10px;
-            background: yellow;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    }
-}
 </style>
