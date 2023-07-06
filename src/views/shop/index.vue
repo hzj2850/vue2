@@ -21,7 +21,7 @@ export default {
     },
     data() {
         return {
-            list: 10
+            list: 100
         }
     },
     activated() {

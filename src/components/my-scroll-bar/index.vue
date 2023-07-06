@@ -55,7 +55,7 @@ export default {
             <xBar {...xb} ref="xBar"></xBar>
             <yBar {...yb} ref="yBar"></yBar>
             <div {...b} ref="body">
-                <div class="ctx" ref="ctx">{ this.$slots.default }</div>
+                { this.$slots.default }
             </div>
         </div>
     },
@@ -71,13 +71,13 @@ export default {
         },
         // 初始化宽高
         setSize() {
-            const r = this.$refs, b = r.body, c = r.ctx, xBar = r.xBar, yBar = r.yBar;
+            const r = this.$refs, b = r.body, xBar = r.xBar, yBar = r.yBar;
             if(!b) return;
             this.xo.show = b.clientWidth < b.scrollWidth;
             this.yo.show = b.clientHeight < b.scrollHeight;
             this.$nextTick(function() {
-                var w = parseInt(b.clientWidth / c.scrollWidth * xBar.getBar()),
-                    h = parseInt(b.clientHeight / c.scrollHeight * yBar.getBar());
+                var w = parseInt(b.clientWidth / b.scrollWidth * xBar.getBar()),
+                    h = parseInt(b.clientHeight / b.scrollHeight * yBar.getBar());
                 if(this.xo.show) this.xo.width = w >= 20 ? w : 20;
                 if(this.yo.show) this.yo.height = h >= 20 ? h : 20;
                 this.bindScroll(b);
