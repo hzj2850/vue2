@@ -28,18 +28,18 @@ export default {
     },
     render() {
         const list = this.$props.list.map(e => <a-select-option value={ e.id }>{ e.text }</a-select-option>);
-        const props = {
-            value: this.$props.id,
-            filterOption: (input, option) => option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0,
-            placeholder: "请选择",
-            ...this.$attrs,
+        const o = {
+            props: {
+                value: this.$props.id,
+                filterOption: (input, option) => option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0,
+                placeholder: "请选择",
+                ...this.$attrs,
+            },
+            on: {
+                change: (v) => this.$emit("change", v),
+            }
         }
-        const on = {
-            change: (v) => this.$emit("change", v),
-        }
-        return <a-select on={on} props={props}>
-            { list }
-        </a-select>
+        return <a-select {...o}>{ list }</a-select>
     },
 }
 </script>
