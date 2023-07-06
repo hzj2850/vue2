@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import MyList from '../../components/my-list.vue'
+import MyList from '../../components/my-list2.vue'
 export default {
   components: { MyList },
   data() {
     return {
       head: [
-          {slot: 'order', title: '序号', style: {'max-width': '100px'}},
-          {slot: 'name', title: '姓名'},
-          {slot: 'age', title: '年龄'},
-          {slot: 'sex', title: '性别'},
+          {slot: 'order', title: '序号', style: {'max-width': '100px', 'min-width':'100px'}},
+          {slot: 'name', title: '姓名', style: {'max-width': '1000px', 'min-width':'1000px'}},
+          {slot: 'age', title: '年龄', style: {'max-width': '1000px', 'min-width':'1000px'}},
+          {slot: 'sex', title: '性别', style: {'max-width': '1000px', 'min-width':'1000px'}},
       ],
       list: [
         {id: 1, name: '李四', age: 35, sex: '男' },
-        {id: 2, name: '李四', age: 35, sex: '男' },
+        {id: 2, name: '性别', age: 35, sex: '男' },
         {id: 3, name: '李四', age: 35, sex: '男' },
         {id: 4, name: '李四', age: 35, sex: '男' },
         {id: 5, name: '李四', age: 35, sex: '男' },
@@ -52,24 +52,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less" scoped>
-.my-list{
-  height: 60vh;
-  /deep/ .my-list-header{
-    line-height: 50px;
-    position: sticky;
-    top: 0;
-    color: #333;
-    > .col{
-      background: #ccc;
-    }
-  }
-  /deep/ .my-list-body{
-    line-height: 70px;
-    .col::before{
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-</style>
