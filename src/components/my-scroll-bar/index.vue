@@ -19,6 +19,10 @@ export default {
                 top: 0,
                 height: 20,
             },
+            lt: {
+                left: 0,
+                top: 0,
+            }
         }
     },
     render() {
@@ -90,6 +94,8 @@ export default {
                   t = Math.round(e.scrollTop / (e.scrollHeight - e.clientHeight) * h) || 0;
             this.xo.left = l + 1 >= w ? w : l;
             this.yo.top  = t + 1 >= h ? h : t;
+            this.lt.left = e.scrollLeft;
+            this.lt.top = e.scrollTop;
         },
         // 滑动滑块，设置滚动条位置
         setXY(v = 0, t = 'x', type) {
@@ -100,6 +106,11 @@ export default {
                   value = parseInt((l / m) * w);
             if(t === 'y') type === 'click' ? b.scrollTo({top: value, behavior: 'smooth'}) : b.scrollTop = value;
             else type === 'click' ? b.scrollTo({left: value, behavior: 'smooth'}) : b.scrollLeft = value;
+        },
+        // 设置滚动条位置
+        scrollTo(o = {}) {
+            if(JSON.stringify(o) === '{}') o = this.lt;
+            this.$refs.body.scrollTo(o);
         },
     },
 }

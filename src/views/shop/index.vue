@@ -1,6 +1,6 @@
 <template>
     <div>
-        <my-scroll-bar>
+        <my-scroll-bar ref="bar">
             <div class="shop-item" v-for="e in list" :key="e" @click="onItem(e)">{{e}}</div>
         </my-scroll-bar>
 
@@ -25,6 +25,7 @@ export default {
         }
     },
     activated() {
+        this.$refs.bar.scrollTo();
         if(JSON.stringify(this.fromMeta) !== '{}') {
             console.log('activated:', JSON.stringify(this.fromMeta));
         }
