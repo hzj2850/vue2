@@ -40,14 +40,14 @@ export default {
         const xb = {
             attrs: this.xo,
             on: {
-                call: e => this.setXY(e.x, 'x'),
+                call: e => this.setXY(e.x, 'x', e.type),
             }
         }
 
         const yb = {
             attrs: this.yo,
             on: {
-                call: e => this.setXY(e.y, 'y'),
+                call: e => this.setXY(e.y, 'y', e.type),
             }
         }
         
@@ -92,14 +92,14 @@ export default {
             this.yo.top  = t + 1 >= h ? h : t;
         },
         // 滑动滑块，设置滚动条位置
-        setXY(v = 0, t = 'x') {
+        setXY(v = 0, t = 'x', type) {
             const r = this.$refs, b = r.body,
                   m = t === 'y' ? r.yBar.getBar() : r.xBar.getBar(),
                   w = t === 'y' ? b.scrollHeight - b.clientHeight : b.scrollWidth - b.clientWidth,
                   l = v <= 0 ? 0 : v >= m ? m : v,
                   value = parseInt((l / m) * w);
-            if(t === 'y') b.scrollTop = value;
-            else b.scrollLeft = value;
+            if(t === 'y') type === 'click' ? b.scrollTo({top: value, behavior: 'smooth'}) : b.scrollTop = value;
+            else type === 'click' ? b.scrollTo({left: value, behavior: 'smooth'}) : b.scrollLeft = value;
         },
     },
 }

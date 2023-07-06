@@ -74,7 +74,7 @@ export default {
                   l = b.offsetTop,
                   s = b.offsetHeight * 0.2,
                   y = t === 't' ? l - s : l + s;
-            this.$emit('call', {y});
+            this.$emit('call', {y, type: 'click'});
         },
     },
 }
