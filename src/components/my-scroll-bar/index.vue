@@ -85,9 +85,11 @@ export default {
         },
         // 滚动监听
         bindScroll(e) {
-            const r = this.$refs, xBar = r.xBar, yBar = r.yBar;
-            this.xo.left = Math.round(Math.ceil(e.scrollLeft) / (e.scrollWidth - e.clientWidth) * xBar.getBar()) || 0;
-            this.yo.top = Math.round(Math.ceil(e.scrollTop) / (e.scrollHeight - e.clientHeight) * yBar.getBar()) || 0;
+            const r = this.$refs, xBar = r.xBar, yBar = r.yBar, w = xBar.getBar(), h = yBar.getBar(),
+                  l = Math.round(e.scrollLeft / (e.scrollWidth - e.clientWidth) * w) || 0,
+                  t = Math.round(e.scrollTop / (e.scrollHeight - e.clientHeight) * h) || 0;
+            this.xo.left = l + 1 >= w ? w : l;
+            this.yo.top  = t + 1 >= h ? h : t;
         },
         // 滑动滑块，设置滚动条位置
         setXY(v = 0, t = 'x') {
