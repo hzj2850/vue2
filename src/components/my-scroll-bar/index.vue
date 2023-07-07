@@ -139,6 +139,10 @@ export default {
             if(JSON.stringify(o) === '{}') o = this.lt;
             this.$refs.body.scrollTo(o);
         },
+        // 用于没有数据时，头部列表需要滚动
+        setCtx(v) {
+            this.$refs.body.querySelector('.group').style.width = v + 'px';
+        },
     },
 }
 </script>

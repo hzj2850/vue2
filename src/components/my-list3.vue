@@ -64,6 +64,11 @@ export default {
             </my-scroll-bar>
         </div>
     },
+    mounted() {
+        const r = this.$refs;
+        // 没有数据时，头部需要滑动
+        r.bar && r.bar.setCtx(r.head.scrollWidth);
+    },
     methods: {
         scroll(e) {
             this.$refs.bar.scrollTo({
