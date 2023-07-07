@@ -43,7 +43,7 @@ export default {
                     style: e.style
                 }
                 return <span {...col}>
-                    { this.$scopedSlots[e.slot] ? this.$scopedSlots[e.slot](item, index) : item[e.slot] || this.default }
+                    { this.$scopedSlots[e.slot] ? this.$scopedSlots[e.slot](item, index) : <div>{item[e.slot] || this.default}</div> }
                 </span>
             })
 
@@ -101,8 +101,6 @@ export default {
 
 <style lang="less" scoped>
 .my-list-3{
-    width: 100%;
-    height: 60vh;
     > .head{
         overflow: auto;
         scrollbar-width: none; // 兼容火狐
@@ -135,12 +133,24 @@ export default {
 .col{
     background: rgba(255, 255, 255, 0.1);
     position: relative;
-    padding: 10px;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 70px;
     flex: 1;
+
+    > div{
+        word-break: break-all;
+        word-wrap: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-align: justify;
+    }
+
     &::before{
         content: '';
         display: block;

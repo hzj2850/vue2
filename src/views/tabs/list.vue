@@ -44,7 +44,7 @@ export default {
         {id: 2, name: '2222222222', age: 35, sex: '男' },
         {id: 3, name: '3333333333333', age: 35, sex: '男' },
         {id: 4, name: '4444444444444', age: 35, sex: '男' },
-        {id: 5, name: '55555555555555555', age: 35, sex: '男' },
+        {id: 5, name: 'ADSL客服经理开始搭建费阿里看的是福建理科的撒酒疯看得见阿狸的伤口附近拉屎款到即发阿三的空间发了喀什的减肥看得见阿萨德了空间弗兰克的时间飞快的阿萨德可立即付款的落实经费', age: 35, sex: '男' },
         {id: 6, name: '66666666666666666', age: 35, sex: '男' },
         {id: 7, name: '7777777777777777', age: 35, sex: '男' },
         {id: 8, name: '888888888888888', age: 35, sex: '男' },
@@ -65,3 +65,13 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.my-list-3{
+  border: 1px solid red;
+  margin: 0 20px;
+  /deep/ .my-scroll-bar{
+    height: 60vh;
+  }
+}
+</style>
