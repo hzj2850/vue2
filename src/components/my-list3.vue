@@ -21,6 +21,10 @@ export default {
         transition: {
             type: String,
             default: 'v'
+        },
+        bar: {
+            type: Boolean,
+            default: false
         }
     },
     components: { MyScrollBar },
@@ -37,7 +41,7 @@ export default {
                     class: { 'col': true },
                     style: e.style
                 }
-                return (<span {...col}>{ this.$scopedSlots[e.slot] ? this.$scopedSlots[e.slot](e, index) : item[e.slot] || this.default }</span>);
+                return (<span {...col}>{ this.$scopedSlots[e.slot] ? this.$scopedSlots[e.slot](item, index) : item[e.slot] || this.default }</span>);
             })
 
             const row = {
@@ -52,22 +56,42 @@ export default {
             return (<li {...row}>{ cols }</li>);
         });
         return <div class="my-list-3">
-            <div class="row">
-                {this.columns.map(e => (<div class="col" style={e.style}>{e.title}</div>))}
+            <div class="row head" ref="head" on={{scroll: e => this.scroll(e)}}>
+                {this.columns.map(e => (<div class="col" style={e.style}>{this.$scopedSlots[e.slot+'-head'] ? this.$scopedSlots[e.slot+'-head'](e) : e.title}</div>))}
             </div>
-            <my-scroll-bar ref="bar">
+            <my-scroll-bar ref="bar" bar={this.bar} always on={{call: e => this.call(e)}}>
                 <transition-group class="group" appear tag="ul" name={this.transition} >{ vnodes }</transition-group>
             </my-scroll-bar>
         </div>
-    }
+    },
+    methods: {
+        scroll(e) {
+            this.$refs.bar.scrollTo({
+                left: e.target.scrollLeft,
+                top: e.target.scrollTop,
+            })
+        },
+        call(o) {
+            const d = this.$refs.head;
+            d && d.scrollTo(o);
+        },
+    },
 }
 </script>
 
 <style lang="less" scoped>
 .my-list-3{
-    border: 1px solid red;
-    width: 60%;
-    height: 400px;
+    width: 100%;
+    height: 60vh;
+    > .head{
+        overflow: auto;
+        scrollbar-width: none; // 兼容火狐
+        -ms-overflow-style: none; // 兼容IE10+
+        -webkit-overflow-scrolling: touch; // 解决 ios 上滑动不流畅
+        &::-webkit-scrollbar { // 隐藏滚动条，兼容 chrome 和 safari 浏览器
+            display: none;
+        }
+    }
 }
 .my-scroll-bar{
     width: 100%;
@@ -85,13 +109,18 @@ export default {
     display: flex;
     padding: 0;
     margin: 0;
-    line-height: 70px;
-    border-top: 1px solid transparent;
-    text-align: center;
+    border-bottom: 1px solid transparent;
+    width: 100%;
 }
 .col{
     background: rgba(255, 255, 255, 0.1);
     position: relative;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    flex: 1;
     &::before{
         content: '';
         display: block;

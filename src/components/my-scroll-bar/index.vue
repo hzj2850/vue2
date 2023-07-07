@@ -13,6 +13,11 @@ export default {
             type: Boolean,
             default: true
         },
+        // 横向滚动条没有数据时，不消失
+        always: {
+            type: Boolean,
+            default: false
+        },
     },
     data() {
         return {
@@ -80,7 +85,8 @@ export default {
             const ro = new ResizeObserver(() => this.setSize());
             const b = this.$refs.body.querySelector('.group');
             if(!b) return alert('请用类名为group的盒子包裹内容');
-            ro.observe(b);
+            ro.observe(b); // 高度变化
+            ro.observe(this.$refs.body); // 宽度变化
         },
         // 初始化宽高
         setSize() {
@@ -89,6 +95,15 @@ export default {
             this.xo.show = b.clientWidth < b.scrollWidth;
             this.yo.show = b.clientHeight < b.scrollHeight;
             this.$nextTick(function() {
+                
+                if(this.always) {
+                    const ctx = b.querySelector('.group');
+                    if(ctx) {
+                        ctx.style.width = b.scrollWidth + 'px';
+                        ctx.style.minHeight = b.clientHeight + 'px';
+                    }
+                }
+
                 var w = parseInt(b.clientWidth / b.scrollWidth * xBar.getBar2()),
                     h = parseInt(b.clientHeight / b.scrollHeight * yBar.getBar2());
                 if(this.xo.show) this.xo.width = w >= 20 ? w : 20;
@@ -106,6 +121,7 @@ export default {
             if(_t === 'scroll') {
                 this.lt.left = e.scrollLeft;
                 this.lt.top = e.scrollTop;
+                this.$emit('call', this.lt);
             }
         },
         // 滑动滑块，设置滚动条位置
