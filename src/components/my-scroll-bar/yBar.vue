@@ -1,5 +1,5 @@
 <script>
-import DragScale from '@/utils/DragScale'
+import drag from '@/utils/DragScale'
 export default {
     data() {
         return {
@@ -59,9 +59,7 @@ export default {
         },
         // 拖动
         dragBox() {
-            const drag = new DragScale();
             drag.drag({
-                tBox: this.$refs.box,
                 target: this.$refs.box,
                 change: e => this.$emit('call', e),
                 down: () => this.hover = true,

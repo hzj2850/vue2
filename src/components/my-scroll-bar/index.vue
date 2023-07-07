@@ -1,7 +1,7 @@
 <script>
 import xBar from './xBar.vue'
 import yBar from './yBar.vue'
-import DragScale from '@/utils/DragScale'
+import drag from '@/utils/DragScale'
 export default {
     components: {
         xBar,
@@ -69,7 +69,6 @@ export default {
     methods: {
         // 监听可视区变化
         resize() {
-            const drag = new DragScale();
             this.setSize();
             drag.addEvent(window, 'resize', () => this.setSize());
         },

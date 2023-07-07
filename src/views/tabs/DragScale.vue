@@ -10,11 +10,24 @@
 import DragScale from '@/utils/DragScale.js'
 export default {
     mounted() {
-        const drag = new DragScale({
-            b: this.$refs.b,
-            t: this.$refs.t,
-        });
-        console.log('拖拽：',drag)
+        DragScale.drag({
+            scope: this.$refs.b,
+            target: this.$refs.t,
+            change: o => {
+                o.target.style.left = o.x + 'px';
+                o.target.style.top = o.y + 'px';
+            }
+        })
+        DragScale.scale({
+            scope: this.$refs.t,
+            minScale: 0.2,
+            maxScale: 5,
+            change: o => {
+                o.target.style.left = o.x + 'px';
+                o.target.style.top = o.y + 'px';
+                o.target.style.transform = 'scale(' + o.scale + ')';
+            }
+        })
     },
 }
 </script>
@@ -32,6 +45,7 @@ export default {
         width: 100%;
         height: 100%;
         object-fit: contain;
+        position: relative;
     }
 }
 </style>

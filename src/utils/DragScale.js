@@ -5,14 +5,11 @@ function DragScale() {
 
 /*
  * 拖拽封装
- * @param {[object]} oBox [操纵范围元素]
- * @param {[object]} tBox [目标元素]
- * @param {[function]} change [实时回调]
+ * @param {[el]} scope [操纵范围元素] target [点击元素] box [目标元素]
+ * @param {[function]} change，up，down [实时回调]
  */
 DragScale.prototype.drag = function (cfig = {}) {
-    const b = cfig.oBox || document.querySelector('html'),
-        t = cfig.tBox || document.querySelector('body'),
-        d = cfig.target || b;
+    const b = cfig.scope || document.querySelector('html'), d = cfig.target || b, t = cfig.box || d;
     let ol = 0, ot = 0;
     const f = e => {
         e = e || window.event;
@@ -41,19 +38,15 @@ DragScale.prototype.drag = function (cfig = {}) {
 
 /*
  * 放大缩小方法封装
- * @param {[object]} oBox [操纵范围元素]
- * @param {[object]} tBox [目标元素]
- * @param {[object]} minScale [最小放大倍数]
- * @param {[object]} maxScale [最大放大倍数]
+ * @param {[object]} scope [操纵范围元素]
+ * @param {[object]} target [目标元素]
+ * @param {[object]} min [最小放大倍数]
+ * @param {[object]} max [最大放大倍数]
  * @param {[function]} change [实时回调]
  */
 DragScale.prototype.scale = function (cfig = {}) {
-    const min = cfig.minScale || 0.2,
-        max = cfig.maxScale || 4,
-        oBox = cfig.oBox || document.querySelector('div'), // 操作区域
-        tBox = cfig.tBox || document.querySelector('div'); // 操作目标
+    const min = cfig.min || 0.2, max = cfig.max || 4, oBox = cfig.scope || document.body, tBox = cfig.target || oBox;
     let scale = 1;
-
     const f = function (e) {
         // 判断放大还是缩小
         let ratio = 1.1; // 放大0.1
@@ -103,4 +96,4 @@ DragScale.prototype.removeEvent = function (e, t, f) {
     else e["on" + t] = null;
 };
 
-export default DragScale
+export default new DragScale();
