@@ -5,12 +5,12 @@ export default {
         // 头部配置
         columns: {
             type: Array,
-            default: () => ([{slot: 'name', title: '姓名', style: {'color': 'red'}}])
+            default: () => ([{slot: 'id', title: 'id', style: {'color': 'red'}}])
         },
         // 列表数据
         data: {
             type: Array,
-            default: () => ([{ name: '王二', age: 23, sex: '男' }])
+            default: () => ([{id: 1}])
         },
         // 没有数据时的占位符
         default: {
@@ -35,13 +35,16 @@ export default {
         }
     },
     render() {
-        const vnodes = this.data.map((item, index) => {
+        const rows = this.data.map((item, index) => {
+
             const cols = this.columns.map(e => {
                 const col = {
                     class: { 'col': true },
                     style: e.style
                 }
-                return (<span {...col}>{ this.$scopedSlots[e.slot] ? this.$scopedSlots[e.slot](item, index) : item[e.slot] || this.default }</span>);
+                return <span {...col}>
+                    { this.$scopedSlots[e.slot] ? this.$scopedSlots[e.slot](item, index) : item[e.slot] || this.default }
+                </span>
             })
 
             const row = {
@@ -55,21 +58,33 @@ export default {
             }
             return (<li {...row}>{ cols }</li>);
         });
-        return <div class="my-list-3">
-            <div class="row head" ref="head" on={{scroll: e => this.scroll(e)}}>
-                {this.columns.map(e => (<div class="col" style={e.style}>{this.$scopedSlots[e.slot+'-head'] ? this.$scopedSlots[e.slot+'-head'](e) : e.title}</div>))}
+
+        const cols = this.columns.map(e => {
+            return <div class="col" style={e.style}>
+                { this.$scopedSlots[e.slot+'-head'] ? this.$scopedSlots[e.slot+'-head'](e) : e.title }
             </div>
-            <my-scroll-bar ref="bar" bar={this.bar} always on={{call: e => this.call(e)}}>
-                <transition-group class="group" appear tag="ul" name={this.transition} >{ vnodes }</transition-group>
+        })
+
+        return <div class="my-list-3">
+            <div class="row head" ref="head" on={{scroll: e => this.scroll(e)}}>{ cols }</div>
+            <my-scroll-bar ref="bar" bar={this.bar} on={{call: e => this.call(e)}}>
+                <transition-group class="group" appear tag="ul" name={this.transition}>
+                    { rows }
+                </transition-group>
             </my-scroll-bar>
         </div>
     },
     mounted() {
-        const r = this.$refs;
-        // 没有数据时，头部需要滑动
-        r.bar && r.bar.setCtx(r.head.scrollWidth);
+        this.setCtx();
     },
     methods: {
+        setCtx() {
+            const r = this.$refs, h = r.head;
+            // 没有数据时，头部需要滑动
+            if(h.scrollWidth > h.clientWidth) {
+                r.bar && r.bar.setCtx(r.head.scrollWidth);
+            }
+        },
         scroll(e) {
             this.$refs.bar.scrollTo({
                 left: e.target.scrollLeft,

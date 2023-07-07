@@ -41,13 +41,15 @@ export default {
                 click: () => this.bindClick('b'),
             }
         }
-        return <div {...a}>
-            <span {...l}></span>
-            <div {...b} ref="bar">
-                <i {...c} ref="box"/>
+        return (
+            <div {...a}>
+                <span {...l}></span>
+                <div {...b} ref="bar">
+                    <i {...c} ref="box"/>
+                </div>
+                <span {...r}></span>
             </div>
-            <span {...r}></span>
-        </div>
+        );
     },
     mounted() {
         this.dragBox();
