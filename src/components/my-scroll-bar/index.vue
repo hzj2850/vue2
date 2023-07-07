@@ -1,23 +1,30 @@
 <script>
 import xBar from './xBar.vue'
 import yBar from './yBar.vue'
-import drag from '@/utils/DragScale'
+import ResizeObserver from 'resize-observer-polyfill';
 export default {
     components: {
         xBar,
         yBar,
+    },
+    props: {
+        // 是否显示滚动条
+        bar: {
+            type: Boolean,
+            default: true
+        },
     },
     data() {
         return {
             xo: {
                 show: false,
                 left: 0,
-                width: 20,
+                width: 0,
             },
             yo: {
                 show: false,
                 top: 0,
-                height: 20,
+                height: 0,
             },
             lt: {
                 left: 0,
@@ -37,7 +44,7 @@ export default {
                 'my-scroll-body': true,
             },
             on: {
-                scroll: e => this.bindScroll(e.target),
+                scroll: e => this.bindScroll(e.target, 'scroll'),
             }
         }
 
@@ -56,21 +63,24 @@ export default {
         }
         
         return <div {...a}>
-            <xBar {...xb} ref="xBar"></xBar>
-            <yBar {...yb} ref="yBar"></yBar>
+            { this.bar ? <xBar {...xb} ref="xBar"></xBar> : '' }
+            { this.bar ? <yBar {...yb} ref="yBar"></yBar> : '' }
+            
             <div {...b} ref="body">
                 { this.$slots.default }
             </div>
         </div>
     },
     mounted() {
-        this.resize();
+        if(this.bar) this.resize();
     },
     methods: {
         // 监听可视区变化
         resize() {
-            this.setSize();
-            drag.addEvent(window, 'resize', () => this.setSize());
+            const ro = new ResizeObserver(() => this.setSize());
+            const b = this.$refs.body.querySelector('.group');
+            if(!b) return alert('请用类名为group的盒子包裹内容');
+            ro.observe(b);
         },
         // 初始化宽高
         setSize() {
@@ -79,22 +89,24 @@ export default {
             this.xo.show = b.clientWidth < b.scrollWidth;
             this.yo.show = b.clientHeight < b.scrollHeight;
             this.$nextTick(function() {
-                var w = parseInt(b.clientWidth / b.scrollWidth * xBar.getBar()),
-                    h = parseInt(b.clientHeight / b.scrollHeight * yBar.getBar());
+                var w = parseInt(b.clientWidth / b.scrollWidth * xBar.getBar2()),
+                    h = parseInt(b.clientHeight / b.scrollHeight * yBar.getBar2());
                 if(this.xo.show) this.xo.width = w >= 20 ? w : 20;
                 if(this.yo.show) this.yo.height = h >= 20 ? h : 20;
-                this.bindScroll(b);
-            });
+                this.$nextTick(() => this.bindScroll(b, 'init'));
+            })
         },
         // 滚动监听
-        bindScroll(e) {
-            const r = this.$refs, xBar = r.xBar, yBar = r.yBar, w = xBar.getBar(), h = yBar.getBar(),
+        bindScroll(e, _t) {
+            const r = this.$refs, xBar = r.xBar, yBar = r.yBar, w = xBar ? xBar.getBar() : 0, h = yBar ? yBar.getBar() : 0,
                   l = Math.round(e.scrollLeft / (e.scrollWidth - e.clientWidth) * w) || 0,
                   t = Math.round(e.scrollTop / (e.scrollHeight - e.clientHeight) * h) || 0;
             this.xo.left = l + 1 >= w ? w : l;
             this.yo.top  = t + 1 >= h ? h : t;
-            this.lt.left = e.scrollLeft;
-            this.lt.top = e.scrollTop;
+            if(_t === 'scroll') {
+                this.lt.left = e.scrollLeft;
+                this.lt.top = e.scrollTop;
+            }
         },
         // 滑动滑块，设置滚动条位置
         setXY(v = 0, t = 'x', type) {
@@ -117,8 +129,6 @@ export default {
 
 <style lang="less" scoped>
 .my-scroll-bar{
-    height: 60vh;
-    width: 90%;
     position: relative;
 
     .my-scroll-body{

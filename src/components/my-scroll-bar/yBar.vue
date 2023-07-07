@@ -57,6 +57,9 @@ export default {
             if(!this.$refs.bar) return 0;
             return this.$refs.bar.clientHeight - this.$refs.box.offsetHeight;
         },
+        getBar2() {
+            return this.$refs.bar.clientHeight;
+        },
         // 拖动
         dragBox() {
             drag.drag({

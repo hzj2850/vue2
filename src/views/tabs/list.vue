@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import MyList from '../../components/my-list2.vue'
+import MyList from '../../components/my-list3.vue'
 export default {
   components: { MyList },
   data() {

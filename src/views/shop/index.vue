@@ -1,7 +1,10 @@
 <template>
     <div>
-        <my-scroll-bar ref="bar">
-            <div class="shop-item" v-for="e in list" :key="e" @click="onItem(e)">{{e}}</div>
+        <a-button @click="list+=1">add</a-button>
+        <my-scroll-bar ref="bar" :bar="true">
+            <div class="group">
+                <div class="shop-item" v-for="e in list" :key="e" @click="onItem(e)">{{e}}</div>
+            </div>
         </my-scroll-bar>
 
         <div class="shop-list">
@@ -21,7 +24,7 @@ export default {
     },
     data() {
         return {
-            list: 100
+            list: 10
         }
     },
     activated() {
