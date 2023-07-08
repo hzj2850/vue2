@@ -7,11 +7,13 @@ export default {
         }
     },
     render() {
+        const suffix = this.$attrs.suffix;
         const a = {
-            class: {
-                'x-bar': true,
-                'bar-hover': this.hover
-            },
+            class: [
+                'x-bar',
+                suffix ? 'x-bar-' + suffix : '',
+                this.hover ? 'bar-hover' +  (suffix ? '-' + suffix : ''): '',
+            ],
             style: {
                 width: this.$attrs.show ? undefined : 0,
             }

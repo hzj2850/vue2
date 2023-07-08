@@ -1,7 +1,7 @@
 <template>
     <div>
       <a-button @click="bindAdd()">添加数据</a-button>
-      <my-list :columns="head" :data="list" transition="v" :bar="true" @click="bindItem">
+      <my-list :columns="head" :data="list" transition="v" :bar="true" suffix="2" @click="bindItem">
         <template slot="order-head">
           序号序号
         </template>
@@ -68,7 +68,7 @@ export default {
 
 <style lang="less" scoped>
 .my-list-3{
-  border: 1px solid red;
+  // border: 1px solid red;
   margin: 0 20px;
   /deep/ .my-scroll-bar{
     height: 60vh;

@@ -47,14 +47,20 @@ export default {
         }
 
         const xb = {
-            attrs: this.xo,
+            attrs: {
+                ...this.xo,
+                suffix: this.$attrs.suffix,
+            },
             on: {
                 call: e => this.setXY(e.x, 'x', e.type),
             }
         }
 
         const yb = {
-            attrs: this.yo,
+            attrs: {
+                ...this.yo,
+                suffix: this.$attrs.suffix,
+            },
             on: {
                 call: e => this.setXY(e.y, 'y', e.type),
             }

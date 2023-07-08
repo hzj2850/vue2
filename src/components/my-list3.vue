@@ -67,7 +67,7 @@ export default {
 
         return <div class="my-list-3">
             <div class="row head" ref="head" on={{scroll: e => this.scroll(e)}}>{ cols }</div>
-            <my-scroll-bar ref="bar" bar={this.bar} on={{call: e => this.call(e)}}>
+            <my-scroll-bar ref="bar" bar={this.bar} suffix={this.$attrs.suffix} on={{call: e => this.call(e)}}>
                 <transition-group class="group" appear tag="ul" name={this.transition}>
                     { rows }
                 </transition-group>
