@@ -86,10 +86,7 @@ export default {
             }
         },
         scroll(e) {
-            this.$refs.bar.scrollTo({
-                left: e.target.scrollLeft,
-                top: e.target.scrollTop,
-            })
+            this.$refs.bar.scrollTo({left: e.target.scrollLeft});
         },
         call(o) {
             const d = this.$refs.head;
