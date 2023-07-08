@@ -129,11 +129,12 @@ export default {
                   m = t === 'y' ? r.yBar.getBar() : r.xBar.getBar(),
                   w = t === 'y' ? b.scrollHeight - b.clientHeight : b.scrollWidth - b.clientWidth,
                   l = v <= 0 ? 0 : v >= m ? m : v,
-                  value = parseInt((l / m) * w);
+                  value = parseInt((l / m) * w),
+                  behavior = type === 'click' ? 'smooth' : 'instant';
             if(t === 'y') {
-                type === 'click' ? b.scrollTo({top: value, behavior: 'smooth'}) : b.scrollTop = value;
+                b.scrollTo({top: value, behavior});
             } else {
-                type === 'click' ? b.scrollTo({left: value, behavior: 'smooth'}) : b.scrollLeft = value;
+                b.scrollTo({left: value, behavior});
             }
         },
         // 设置滚动条位置
