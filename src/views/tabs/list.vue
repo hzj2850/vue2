@@ -2,6 +2,9 @@
     <div>
       <a-button @click="bindAdd()">添加数据</a-button>
       <my-list :columns="head" :data="list" transition="v" :bar="true" suffix="2" @click="bindItem">
+        <div class="no-list">
+          暂无数据
+        </div>
         <template slot="order-head">
           序号序号
         </template>
@@ -73,5 +76,16 @@ export default {
   /deep/ .my-scroll-bar{
     height: 60vh;
   }
+}
+.no-list{
+  width:100%;
+  height:100%;
+  background:rgba(255, 255, 255, 0.1);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 </style>

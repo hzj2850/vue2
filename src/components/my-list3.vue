@@ -71,6 +71,7 @@ export default {
                 <transition-group class="group" appear tag="ul" name={this.transition}>
                     { rows }
                 </transition-group>
+                { rows.length === 0 && (this.$scopedSlots['default'] ? this.$scopedSlots['default']() : '暂无数据') }
             </my-scroll-bar>
         </div>
     },
