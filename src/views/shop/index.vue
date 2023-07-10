@@ -18,6 +18,7 @@
 import MyScrollBar from '../../components/my-scroll-bar/index.vue'
 import { keepAlive } from '@/utils/setting/mixins'
 export default {
+    name: 'shop',
     mixins: [keepAlive],
     components: {
         MyScrollBar
@@ -26,6 +27,9 @@ export default {
         return {
             list: 10
         }
+    },
+    created() {
+        console.log('初始化数据');
     },
     activated() {
         this.$refs.bar.scrollTo();

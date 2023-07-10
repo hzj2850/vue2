@@ -1,10 +1,9 @@
 <template>
     <a-config-provider :locale="zh_CN">
         <div id="app">
-            <keep-alive>
-                <router-view v-if="$route.meta.keepAlive" />
+            <keep-alive :include="$store.state.keepAliveArr">
+                <router-view />
             </keep-alive>
-            <router-view v-if="!$route.meta.keepAlive" />
         </div>
     </a-config-provider>
 </template>
