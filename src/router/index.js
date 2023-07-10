@@ -53,7 +53,7 @@ const routes = [
     path: '/shop',
     name: 'shop',
     component: () => import(/* webpackChunkName: "shop" */ '../views/shop/index.vue'),
-    meta: {title: '商品列表', keepAlive: true}
+    meta: {title: '商品列表'}
   },
   {
     path: '/shop-details',

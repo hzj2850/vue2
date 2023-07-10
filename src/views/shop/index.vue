@@ -29,13 +29,11 @@ export default {
         }
     },
     created() {
-        console.log('初始化数据');
+        console.log('1.created');
     },
     activated() {
         this.$refs.bar.scrollTo();
-        if(JSON.stringify(this.fromMeta) !== '{}') {
-            console.log('activated:', JSON.stringify(this.fromMeta));
-        }
+        console.log('1.activated:', JSON.stringify(this.fromMeta));
     },
     methods: {
         onItem(e) {

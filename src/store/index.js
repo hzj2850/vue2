@@ -20,7 +20,8 @@ export default new Vuex.Store({
         },
         // 删除缓存数组中的元素
         SET_DEL_KEEPALIVE(s, v) {
-            s.keepAliveArr.splice(v);
+            const i = s.keepAliveArr.findIndex(r => r === v);
+            if(i >= 0) s.keepAliveArr.splice(i, 1);
         },
     },
     actions: {
