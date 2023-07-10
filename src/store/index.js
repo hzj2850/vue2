@@ -8,7 +8,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         userInfo: {}, // 当前登录用户信息
-        zoom: 1, // 页面缩放倍数
         keepAliveArr: [], // 需要缓存的组件（根据组件名称name缓存）
     },
     mutations: {
@@ -23,9 +22,6 @@ export default new Vuex.Store({
         SET_DEL_KEEPALIVE(s, v) {
             s.keepAliveArr.splice(v);
         },
-        SET_ZOOM(state, v) {
-            state.zoom = v;
-        }
     },
     actions: {
     },
