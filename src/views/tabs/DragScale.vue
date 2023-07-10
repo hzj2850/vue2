@@ -42,9 +42,9 @@ export default {
     text-align: center;
     margin: 50px auto;
     img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+        // width: 100%;
+        // height: 100%;
+        object-fit: none;
         position: relative;
     }
 }

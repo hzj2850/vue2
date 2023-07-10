@@ -6,8 +6,8 @@ import VueLazyLoad from 'vue-lazyload'
 const install = Vue => {
     Vue.use(VueLazyLoad, {
         preLoad: 1.3,
-        // error: require('@/assets/images/02.png'),
-        // loading: require('@/assets/images/loading.gif'),
+        error: require('@/assets/img/load-err.png'),
+        loading: require('@/assets/img/load-img.gif'),
         attempt: 2,
     })
 }
