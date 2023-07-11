@@ -14,6 +14,10 @@ Vue.use(Antd);
 import Loading from './components/loading/index'
 Vue.use(Loading);
 
+// 爆布流
+// import scrollreveal from './utils/setting/scrollreveal'
+// Vue.use(scrollreveal);
+
 // 轮播图、图片懒加载
 import Viewer from './utils/setting/v-viewer'
 import VLazy from './utils/setting/vLazy'
