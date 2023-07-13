@@ -8,7 +8,6 @@ export default {
         }
     },
     render() {
-        const nodes = Object.keys(this.$slots).map(name => (<slot slot={name}>{this.$slots[name]}</slot>))
         const o = {
             props: {
                 fileList: [],
@@ -20,7 +19,9 @@ export default {
                 change: function(){}, // 阻止触发表单验证
             }
         }
-        return <a-upload-dragger {...o} class="my-upload">{ nodes }</a-upload-dragger>
+        return <a-upload-dragger {...o} class="my-upload">
+            { this.$scopedSlots.default ? this.$scopedSlots.default() : '上传图片' }
+        </a-upload-dragger>
     },
     methods: {
         customRequest(o) {
