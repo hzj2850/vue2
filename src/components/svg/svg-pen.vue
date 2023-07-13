@@ -24,9 +24,9 @@ export default {
         }
     },
     mounted() {
-        const el = this.$refs.btn, st = window.getComputedStyle(el),
-              w = parseFloat(st.width),
-              h = parseFloat(st.height);
+        const el = this.$refs.btn,
+              w = parseFloat(el.offsetWidth),
+              h = parseFloat(el.offsetHeight);
         this.$refs.div.style.width = w + "px";
         this.$refs.div.style.height = h + "px";
         if(this.$props.type === 'left') this.points = `${h / 2},0 ${w},0 ${w - h / 2},${h / 2} ${w},${h} ${h / 2},${h} 0,${h / 2}`;
