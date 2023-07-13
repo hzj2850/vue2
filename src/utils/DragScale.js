@@ -64,7 +64,7 @@ DragScale.prototype.scale = function (cfig = {}) {
         }
         // 计算偏移量（当鼠标在目标元素上时）
         let x = parseFloat(tBox.style.left || 0), y = parseFloat(tBox.style.top || 0);
-        if (e.target.isSameNode(tBox)) {
+        if (e.target === tBox) {
             const z = ratio - 1;
             x -= (e.clientX - tBox.offsetLeft - tBox.offsetWidth * 0.5) * z;
             y -= (e.clientY - tBox.offsetTop - tBox.offsetHeight * 0.5) * z;
@@ -77,7 +77,7 @@ DragScale.prototype.scale = function (cfig = {}) {
             scale: scale.toFixed(5)
         })
         // 阻止滚动条
-        e.preventDefault();
+        e.preventDefault ? e.preventDefault(): window.event.returnValue = false;
     }
 
     this.addEvent(oBox, 'mousewheel', f)
