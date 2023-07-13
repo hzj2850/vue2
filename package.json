@@ -12,6 +12,7 @@
     "ant-design-vue": "^1.7.8",
     "axios": "^0.18.1",
     "core-js": "^2.6.5",
+    "image-conversion": "^2.1.1",
     "keep-alive": "^0.1.0",
     "scrollreveal": "^4.0.9",
     "v-viewer": "^1.6.4",

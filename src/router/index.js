@@ -47,6 +47,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "shopping" */ '../views/tabs/shopping.vue'),
         meta: {title: '抛物线', icon: 'icon-a-3AHU01kongtiao'}
       },
+      {
+        path: 'compress',
+        name: 'compress',
+        component: () => import(/* webpackChunkName: "compress" */ '../views/tabs/compress.vue'),
+        meta: {title: '压缩', icon: 'icon-a-3AHU01kongtiao'}
+      },
     ]
   },
   {
