@@ -10,6 +10,10 @@ import store from './store/index'
 import Antd from './utils/setting/ant'
 Vue.use(Antd);
 
+// ul库 二次封装
+import AntCom from './components/ant-form/index'
+Vue.use(AntCom);
+
 // 加载中动画 this.$loading();
 import Loading from './components/loading/index'
 Vue.use(Loading);

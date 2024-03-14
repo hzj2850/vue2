@@ -6,7 +6,7 @@ import {
   ConfigProvider,
   // Layout,
   Input,
-  // InputNumber,
+  InputNumber,
   Button,
   // Switch,
   Radio,
@@ -65,7 +65,7 @@ const importAntd = Vue => {
   Vue.use(ConfigProvider)
   // Vue.use(Layout)
   Vue.use(Input)
-  // Vue.use(InputNumber)
+  Vue.use(InputNumber)
   Vue.use(Button)
   // Vue.use(Switch)
   Vue.use(Radio)
