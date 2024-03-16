@@ -4,6 +4,9 @@ export const formList = [
         labelStyle: 'width: 5em;',
         slot: 'radio',
         key: 'rType',
+        // callback(obj) {
+        //     console.log(this, obj);
+        // },
     },
     {
         label: '多选框',

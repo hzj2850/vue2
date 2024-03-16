@@ -2,7 +2,7 @@
     <a-form-model ref="ruleForm" :model="form" :rules="rules" :colon="colon" :hideRequiredMark="hideRequiredMark" :labelAlign="labelAlign" :layout="layout">
         <a-form-model-item v-for="(item, index) in formList" :key="index" :label="item.label" :prop="item.key">
             <!-- 单选框 -->
-            <ant-radio @change="onRadio($event, item)" v-if="item.slot === 'radio'" />
+            <ant-radio :value="form[item.key]" @change="onRadio($event, item)" v-if="item.slot === 'radio'" />
             <!-- 多选框 -->
             <ant-checkbox v-else-if="item.slot === 'checkbox'" />
             <!-- 日期 -->
@@ -75,8 +75,8 @@ export default {
         },
         // 单选框
         onRadio(v, e) {
-            this.$set(this.form, e.key, v);
-            this.$listeners['callback'] && this.$emit('callback', {e,v});
+            if(e.callback) e.callback(v);
+            else this.$set(this.form, e.key, v);
         },
     },
 }

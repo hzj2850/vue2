@@ -1,7 +1,12 @@
 <template>
     <div>
-        <ant-form ref="form" @callback="onCall"></ant-form>
-        <button @click="onSubmit">提交</button>
+        <ant-form :form="form" ref="form"></ant-form>
+        <a-button @click="onSubmit" type="primary">提交</a-button>
+        <a-button @click="onClear" type="danger">清空</a-button>
+        <div class="form">
+            <ant-radio v-model="form.rType" />
+            {{ form }}
+        </div>
     </div>
 </template>
 
@@ -11,15 +16,28 @@ export default {
     components: {
         antForm
     },
+    data() {
+        return {
+            form: {}
+        };
+    },
     methods: {
+        onClear() {
+            this.$refs.form.resetForm();
+        },
         onSubmit() {
             this.$refs.form.onSubmit(res => {
                 console.log('成功提交：', res);
             });
         },
-        onCall(v) {
-            console.log(v,'jjjj')
-        },
     }
 }
 </script>
+
+<style lang="less" scoped>
+.form{
+    background: #fff;
+    padding: 30px;
+    color: #333;
+}
+</style>
