@@ -5,6 +5,7 @@
         <a-button @click="onClear" type="danger">清空</a-button>
         <div class="form">
             <ant-radio v-model="form.rType" />
+            <ant-checkbox v-model="form.checkbox" />
             {{ form }}
         </div>
     </div>
@@ -23,7 +24,7 @@ export default {
     },
     methods: {
         onClear() {
-            this.$refs.form.resetForm();
+            this.form = {};
         },
         onSubmit() {
             this.$refs.form.onSubmit(res => {

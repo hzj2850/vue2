@@ -4,13 +4,17 @@ export const formList = [
         labelStyle: 'width: 5em;',
         slot: 'radio',
         key: 'rType',
+        // options: [],
         // callback(obj) {
         //     console.log(this, obj);
         // },
     },
     {
         label: '多选框',
-        slot: 'checkbox'
+        slot: 'checkbox',
+        key: 'checkbox',
+        // options: [],
+        // callback() { },
     },
     {
         label: '日期',
@@ -45,6 +49,7 @@ export const formList = [
 
 export const rules = {
     rType: [{ required: true, message: '单选框必选', trigger: 'change' }],
+    checkbox: [{ required: true, message: '多选框必选', trigger: 'change' }],
     num: [
         { required: true, message: '数字不能为空', trigger: 'change' },
         { min: 3, max: 5, message: '请输入3到5之间的值', trigger: 'change' },

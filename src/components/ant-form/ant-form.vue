@@ -2,9 +2,9 @@
     <a-form-model ref="ruleForm" :model="form" :rules="rules" :colon="colon" :hideRequiredMark="hideRequiredMark" :labelAlign="labelAlign" :layout="layout">
         <a-form-model-item v-for="(item, index) in formList" :key="index" :label="item.label" :prop="item.key">
             <!-- 单选框 -->
-            <ant-radio :value="form[item.key]" @change="onRadio($event, item)" v-if="item.slot === 'radio'" />
+            <ant-radio :value="form[item.key]" :options="item.options" @change="onRadio($event, item)" v-if="item.slot === 'radio'" />
             <!-- 多选框 -->
-            <ant-checkbox v-else-if="item.slot === 'checkbox'" />
+            <ant-checkbox :value="form[item.key]" :options="item.options" @change="onRadio($event, item)" v-else-if="item.slot === 'checkbox'" />
             <!-- 日期 -->
             <ant-date v-else-if="item.slot === 'date'" />
             <!-- 月份 -->
@@ -87,8 +87,17 @@ export default {
     background: #fff;
     
     /deep/ .has-error{
-        .ant-radio-inner{
-            border-color: red;
+        .ant-radio-wrapper{
+            color: red;
+            .ant-radio-inner{
+                border-color: red;
+            }
+        }
+        .ant-checkbox-wrapper{
+            color: red;
+            .ant-checkbox-inner{
+                border-color: red;
+            }
         }
     }
 }
