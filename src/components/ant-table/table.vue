@@ -1,7 +1,11 @@
 <script>
+import AntLayout from '../ant-layout/index.vue'
 import { setData } from './cfig'
 import { ScrollFn, moveScrollBar } from './fn'
 export default {
+    components: {
+        AntLayout
+    },
     props: {
         columns: {
             type: Array,

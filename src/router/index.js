@@ -14,7 +14,7 @@ const routes = [
       {
         path: 'form',
         name: 'form',
-        component: () => import(/* webpackChunkName: "form" */ '../views/tabs/form2.vue'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/tabs/form.vue'),
         meta: {title: '表单验证', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
