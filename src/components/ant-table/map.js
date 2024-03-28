@@ -1,3 +1,20 @@
+// table布局时，计算rowspan
+const rowspan = (o, v = 0) => {
+    for (let e of o) {
+        if (e.child) return v + 1;
+    }
+    return v;
+}
+
+// table布局时，计算colspan
+const colspan = (a, b = []) => {
+    for (let e of a) {
+        if (e.child) colspan(e.child, b);
+        else b.push(e.title);
+    }
+    return b.length;
+}
+
 // 4、表格内容配置
 const colText = function (col, obj) {
     if (obj.item) return {
@@ -15,8 +32,8 @@ const colObj = function (col, obj) {
     return {
         attrs: {
             fixed: col.fixed,
-            rowspan: obj.item ? undefined : col.rowspan,
-            colspan: obj.item ? undefined : col.colspan,
+            rowspan: !obj.item ? rowspan([col]) : undefined,
+            colspan: !obj.item ? colspan([col]) : undefined,
         },
         class: col.class,
         style: col.style + (col.customStyle && obj.item ? col.customStyle(obj) : ''),
