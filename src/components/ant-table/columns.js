@@ -1,6 +1,7 @@
 // title：表头名称
 // key：取值
 // class：添加类名
+// style：添加样式
 // child：表格布局
 // headRender：表头插槽
 // scopedSlots：内容插槽
@@ -13,8 +14,9 @@ export const columns = [
         class: 'fixed fix-last',
         style: 'min-width: 6em;left: 0;background: #fff;',
         // style: 'width:0;left: 0;box-shadow:none;padding:0;',
-        customRender: ({ index }) => {
-            return index + 1;
+        customRender: res => {
+            if(res.item) res.content = res.index + 1;
+            return res;
         }
     },
     {
@@ -22,11 +24,19 @@ export const columns = [
         key: 'name',
         headRender: 'header',
         style: 'min-width: 12em;',
+        customRender: res => {
+            if(res.index == 2) res.obj.attrs.colspan = 2;
+            return res;
+        }
     },
     {
         title: 'age1',
         key: 'age',
         style: 'min-width: 12em;',
+        customRender: res => {
+            if(res.index == 2) res.tag = null;
+            return res;
+        }
     },
     {
         title: 'age2',
@@ -62,14 +72,14 @@ export const columns = [
         title: '性别',
         key: 'sex',
         style: 'min-width: 32em;',
-        customRender: ({ item }) => {
-            const value = item.sex;
-            return value == 0 ? '女' : value == 1 ? '男' : '未知';
+        customRender: res => {
+            const t = res.content;
+            if(res.item) {
+                res.content = t == 0 ? '女' : t == 1 ? '男' : '未知';
+                res.obj.style += `color: ${t == 0 ? '#0ff' : t == 1 ? '#f0f' : 'red'};`
+            }
+            return res;
         },
-        customStyle: ({ item }) => {
-            const value = item.sex;
-            return `color: ${value == 0 ? '#0ff' : value == 1 ? '#0f0' : '#f0f'};`
-        }
     },
     {
         title: '操作',

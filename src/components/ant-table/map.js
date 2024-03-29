@@ -15,38 +15,24 @@ const colspan = (a, b = []) => {
     return b.length;
 }
 
-// 4、表格内容配置
-const colText = function (col, obj) {
-    if (obj.item) return {
-        content: col.customRender ? col.customRender(obj) : obj.item[col.key] || '',
-        slot: col.scopedSlots,
-    }
-    return {
-        content: col.title,
-        slot: col.headRender,
-    }
-}
-
-// 3、节点配置
-const colObj = function (col, obj) {
-    return {
-        attrs: {
-            fixed: col.fixed,
-            rowspan: !obj.item ? rowspan([col]) : undefined,
-            colspan: !obj.item ? colspan([col]) : undefined,
-        },
-        class: col.class,
-        style: col.style + (col.customStyle && obj.item ? col.customStyle(obj) : ''),
-    }
-}
+// 自定义渲染
+const customRender = (col, v) => col.customRender ? col.customRender(v) : v;
 
 // 2、表格配置循环
 export const colsMap = function (cols, obj, cfig) {
-    return cols.map(col => ({
+    return cols.map(col => customRender(col,{
+        ...obj,
         tag: cfig.td || 'td',
-        scope: obj,
-        ...colText(col, obj),
-        obj: colObj(col, obj),
+        slot: obj.item ? col.scopedSlots : col.headRender,
+        content: obj.item ? obj.item[col.key] : col.title,
+        obj: {
+            class: col.class,
+            style: col.style,
+            attrs: {
+                rowspan: !obj.item ? rowspan([col]) : undefined,
+                colspan: !obj.item ? colspan([col]) : undefined,
+            },
+        }
     }));
 }
 
