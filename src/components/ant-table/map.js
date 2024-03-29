@@ -20,7 +20,7 @@ const customRender = (col, v) => col.customRender ? col.customRender(v) : v;
 
 // 2、表格配置循环
 export const colsMap = function (cols, obj, cfig) {
-    return cols.map(col => customRender(col,{
+    return cols.map(col => customRender(col, {
         ...obj,
         tag: cfig.td || 'td',
         slot: obj.item ? col.scopedSlots : col.headRender,
@@ -44,6 +44,10 @@ export const rowMap = function (list, cols, cfig) {
         obj: {
             attrs: {
                 'data-index': index,
+            },
+            on: {
+                // 给每行添加点击事件
+                ...(cfig.click ? { click: () => cfig.click(item, index) } : {}),
             }
         }
     }));

@@ -21,7 +21,10 @@ const rowHeadMap = (cols, b = []) => {
 }
 
 // 1、渲染表格最外层
-export const setData = function (cols, list) {
+export const setData = function (self) {
+    let list = self.listdata, cols = self.columns, cfig = {};
+    // 给每行添加点击事件
+    if (self.$listeners['row']) cfig.click = self.$listeners['row'];
     return [
         {
             tag: 'table',
@@ -32,7 +35,7 @@ export const setData = function (cols, list) {
                 },
                 {
                     tag: 'tbody',
-                    child: rowMap(list, fn(cols), {}),
+                    child: rowMap(list, fn(cols), cfig),
                 }
             ]
         }
