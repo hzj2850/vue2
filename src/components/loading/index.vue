@@ -3,72 +3,88 @@ export default {
     render() {
         const o = {
             class: {
-                'my-loading-com': true,
+                'my-load-1': true,
             },
-            style: {
-                'display': this.visible ? 'block' : 'none',
-            }
         }
-        return <div {...o}>
-            <span class="loading-slot">
-                <a-spin size="large" />
-                <div class="innerHTML" domPropsInnerHTML={ this.defaultText }></div>
-            </span>
-        </div>
+        return <transition name="loading" appear>
+            <div {...o} v-show={this.visible}>
+                <span>
+                    { this.defaultText || '加载中' }
+                </span>
+            </div>
+        </transition>
     },
     data() {
         return {
             visible: false,
-            defaultText: "加载中",
+            defaultText: '',
         }
     },
     methods: {
         show(v) {
-            // Boolean
-            if(v === true || v === false) {
-                this.defaultText = "加载中";
-                return this.visible = v;
+            if(v) {
+                this.defaultText = v instanceof Object ? v.text : typeof v !== 'boolean' ? v : '';
+                this.visible = true;
+            } else {
+                this.visible = false;
             }
-
-            // Object
-            if(v instanceof Object) {
-                this.defaultText = v.text || "加载中";
-                return this.visible = true;
-            }
-
-            // String
-            this.defaultText = v || "加载中";
-            this.visible = !this.visible;
         },
     },
 }
 </script>
 
 <style lang="less" scoped>
-.my-loading-com {
+.my-load-1 {
     position: absolute;
     left: 0;
     top: 0;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    user-select: none;
+    // 垂直、水平居中
     text-align: center;
     &::before{
-        vertical-align: middle;
         content: '';
         display: inline-block;
         width: 0;
         height: 100%;
+        vertical-align: middle;
     }
-    > .loading-slot{
+
+    > span{
         font-size: 20px;
         color: #fff;
-        display: inline-block;
-        > .innerHTML{
-            margin-top: 20px;
-            text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
-        }
+        text-shadow: 0 1px 4px #222;
+    }
+}
+
+// 过度动画
+.loading-enter-active {
+    animation: enterLoad1 300ms linear;
+}
+.loading-leave-active {
+    animation: leaveLoad1 1200ms linear;
+}
+
+@keyframes enterLoad1 {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes leaveLoad1 {
+    0%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
     }
 }
 </style>
