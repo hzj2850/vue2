@@ -25,7 +25,10 @@ export const columns = [
         headRender: 'header',
         style: 'min-width: 12em;',
         customRender: res => {
-            if(res.index == 2) res.obj.attrs.colspan = 2;
+            if(res.index == 2) {
+                res.obj.attrs.colspan = 2;
+                res.obj.style += 'color: red;';
+            }
             return res;
         }
     },
@@ -40,7 +43,7 @@ export const columns = [
     },
     {
         title: 'age2',
-        key: 'age',
+        key: 'sex',
         style: 'min-width: 12em;',
     },
     {
