@@ -1,0 +1,30 @@
+.ant-form-item{
+    margin: 0;
+    display: flex;
+    &::before, &::after{
+        display: none;
+    }
+    /deep/ .ant-form-item-label{
+        > label{
+            color: inherit;
+            font-size: inherit;
+        }
+    }
+    /deep/ .ant-form-item-control-wrapper{
+        flex: 1;
+    }
+}
+
+
+/deep/ .ant-form-explain{
+    display: none;
+}
+
+/deep/ .has-error {
+    .ant-checkbox-wrapper, .ant-radio-wrapper{
+        color: red;
+    }
+    .ant-checkbox-inner, .ant-radio-inner{
+        border-color: red;
+    }
+}

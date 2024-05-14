@@ -1,34 +1,17 @@
 <template>
-    <a-radio-group :value="value" :options="options" @change="bindChange" />
+    <a-radio-group
+        :value="value"
+        :options="$attrs.options || [{label: '是', value: '1'}, {label: '否', value: '2'}]"
+        @change="v => $emit('change', v.target.value)"
+    />
 </template>
 
 <script>
 export default {
-    props: {
-        value: {
-            type: [String, Number]
-        },
-        options: {
-            type: Array,
-            default: () => [
-                { label: "是", value: 1 },
-                { label: "否", value: 2 },
-            ],
-        },
-    },
+    props: ['value'],
     model: {
         prop: "value",
         event: "change",
-    },
-    methods: {
-        bindChange(e) {
-            this.$emit('change', e.target.value);
-        },
-    },
-    watch: {
-        value(v, v2) {
-            if(v && !v2) this.$emit('change', v);
-        }
     },
 }
 </script>

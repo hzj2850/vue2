@@ -1,4 +1,4 @@
-import * as imageConversion from 'image-conversion'
+// import * as imageConversion from 'image-conversion'
 
 export function compressImg(file, cfig = {}) {
     return new Promise((resolve, reject) => {
