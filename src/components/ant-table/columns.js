@@ -2,9 +2,8 @@
 // key：取值
 // class：添加类名
 // style：添加样式
-// child：表格布局
-// headRender：表头插槽
-// scopedSlots：内容插槽
+// child：多级表头
+// slot：内容插槽
 
 
 // 表格头部配置
@@ -12,38 +11,15 @@ export const columns = [
     {
         title: '序号',
         class: 'fixed fix-last',
-        style: 'min-width: 6em;left: 0;background: #fff;',
-        // style: 'width:0;left: 0;box-shadow:none;padding:0;',
+        style: 'min-width: 6em;left: 0;',
+        slot: 'jj',
         customRender: res => {
-            if (res.item) res.content = res.index + 1;
-            return res;
+            console.log(res, 'jjjjjjj')
         }
     },
     {
         title: '姓名',
         key: 'name',
-        headRender: 'header',
-        style: 'min-width: 12em;',
-        customRender: res => {
-            if (res.index == 2) {
-                res.obj.attrs.colspan = 2;
-                res.obj.style += 'color: red;';
-            }
-            return res;
-        }
-    },
-    {
-        title: 'age1',
-        key: 'age',
-        style: 'min-width: 12em;',
-        customRender: res => {
-            if (res.index == 2) res.tag = null;
-            return res;
-        }
-    },
-    {
-        title: 'age2',
-        key: 'sex',
         style: 'min-width: 12em;',
     },
     {
@@ -76,19 +52,14 @@ export const columns = [
         key: 'sex',
         style: 'min-width: 32em;',
         customRender: res => {
-            const t = res.content;
-            if (res.item) {
-                res.content = t == 0 ? '女' : t == 1 ? '男' : '未知';
-                res.obj.style += `color: ${t == 0 ? '#0ff' : t == 1 ? '#f0f' : 'red'};`
-            }
-            return res;
+            console.log(res, 'jjjjj1111')
         },
     },
     {
         title: '操作',
         slot: 'action',
         class: 'fixed fix-first',
-        style: 'min-width: 10em;right: 0;background: #fff;',
+        style: 'min-width: 10em;right: 0;',
     },
 ];
 

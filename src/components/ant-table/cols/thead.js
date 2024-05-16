@@ -16,9 +16,11 @@ const colspan = (a, b = []) => {
 }
 
 // 自定义列的内容
-const fn = e => {
+const fn = (e, c) => {
     if (e.slot) {
-        return '头部插槽'
+        const slots = c.parent.$scopedSlots;
+        const key = e.slot + '_head';
+        return slots[key] ? slots[key](e) : e.title;
     } else {
         return e.title;
     }
@@ -33,7 +35,7 @@ const colMap = (h, c, a) => {
             rowspan: rowspan([e]),
             colspan: colspan([e]),
         },
-    }, [fn(e)]))
+    }, [fn(e, c)]))
 }
 
 // 行循环

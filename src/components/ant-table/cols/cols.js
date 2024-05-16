@@ -1,7 +1,7 @@
 // 3、自定义列的内容
 const fn2 = function (h, props) {
     const { col, item, index, slots } = props;
-    if (col.slot) return slots[col.slot] ? slots[col.slot]({ item, index }) : '插槽';
+    if (col.slot) return slots[col.slot] ? slots[col.slot]({ item, index }) : col.slot;
     return h('span', {}, item[col.key] || '');
 }
 

@@ -7,6 +7,9 @@
             <a slot="action" @click="onSe(item)" slot-scope="{item,index}">
                 查看{{ index }}
             </a>
+            <template #jj_head="e">
+                {{ e.title }}头部
+            </template>
         </AntTable2>
     </div>
 </template>
