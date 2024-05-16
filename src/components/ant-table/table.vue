@@ -1,7 +1,11 @@
 <script>
+import AntLayout from '../ant-layout/index.vue'
 import { setData } from './cfig'
 import { ScrollFn, moveScrollBar } from './fn'
 export default {
+    components: {
+        AntLayout
+    },
     props: {
         columns: {
             type: Array,
@@ -13,7 +17,7 @@ export default {
         },
     },
     render(h) {
-        const tbody = h('ant-layout', { attrs: { layout: setData(this.columns, this.listdata) }, scopedSlots: this.$scopedSlots });
+        const tbody = h('ant-layout', { attrs: { layout: setData(this) }, scopedSlots: this.$scopedSlots });
         const vNode = h('div', { class: 'ant-table-body' }, [tbody]);
         return h('div', { class: 'ant-table' }, [<h1>header</h1>, vNode, <div>footer</div>]);
     },

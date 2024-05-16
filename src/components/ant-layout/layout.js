@@ -41,7 +41,7 @@ const arr = [
 ]
 
 // 元素内容渲染：slot > content
-const fn2 = (e, o) => [e.slot && o[e.slot] ? o[e.slot](e.scope || {}) : e.content];
+const fn2 = (e, o) => [e.slot && o[e.slot] ? o[e.slot](e) : e.content];
 
 // 递归循环数组
 const fn = (h, a, o) => a.map(e => h(e.tag, e.obj || {}, e.child ? fn(h, e.child, o) : fn2(e, o)));

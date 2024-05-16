@@ -12,11 +12,13 @@
 </template>
 
 <script>
-import AntTable2 from './ant-table/table.vue'
-import {columns, listData } from './ant-table/columns'
+import AntTable2 from '../../components/ant-table/table.vue'
+import AntLayout from '../../components/ant-layout/index.vue'
+import {columns, listData } from '../../components/ant-table/columns'
 export default {
     components: {
         AntTable2,
+        AntLayout
     },
     data() {
         return {
