@@ -3,7 +3,7 @@
         <ant-layout></ant-layout>
 
         <button @click="onEdit">添加数据</button>
-        <AntTable2 :columns="columns" :listdata="listData">
+        <AntTable2 :columns="columns" :listdata="listData" row-key="name">
             <a slot="action" @click="onSe(item)" slot-scope="{item,index}">
                 查看{{ index }}
             </a>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import AntTable2 from '../../components/ant-table/table.vue'
+import AntTable2 from '../../components/ant-table/cols/index.vue'
 import AntLayout from '../../components/ant-layout/index.vue'
 import {columns, listData } from '../../components/ant-table/columns'
 export default {
@@ -28,7 +28,9 @@ export default {
     },
     methods: {
         onEdit() {
-            this.listData.push(this.listData[0]);
+            const obj = {...this.listData[0]};
+            obj.name += 1;
+            this.listData.push(obj);
         },
         onSe(e) {
             alert(JSON.stringify(e));

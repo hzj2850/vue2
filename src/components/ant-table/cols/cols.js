@@ -1,24 +1,24 @@
 // 3、自定义列的内容
-const fn = function (h, props) {
-    const { col, item, index, slots, value } = props;
+const fn2 = function (h, props) {
+    const { col, item, index, slots } = props;
     if (col.slot) return slots[col.slot] ? slots[col.slot]({ item, index }) : '插槽';
-    if (col.wrap) return h(col.wrap, {}, [value]);
-    return value;
+    return h('span', {}, item[col.key] || '');
 }
 
-// 2、创建列的虚拟dom
-const colfn = function (h, props) {
-    const { col, item, index } = props;
-    const v = item[col.key], value = (v || v === 0) ? v : '';
-    let obj = { class: 'td', value };
-    if (col.customRender) obj = (col.customRender({ obj, item, index }) || obj);
-    return h(col.tag || 'div', obj, [fn(h, { ...props, value: obj.value })]);
+// 2、过滤表格配置
+export const fn = (a, b = []) => {
+    for (let e of a) {
+        if (e.child) fn(e.child, b);
+        else b.push(e);
+    }
+    return b;
 }
 
 // 1、循环列
-export const colMap = function (h, props) {
-    const { columns, item, index, slots } = props;
-    const slot = columns.customSlot ? columns.customSlot({ item, index }) : '';
-    if (slot) return slots[slot] ? slots[slot]({ item, index }) : '插槽';
-    return (columns.cols || []).map(col => colfn(h, { col, item, index, slots }));
+export function colRender(h, c) {
+    const { cols, item, index, slots, tag } = c.props;
+    return fn(cols || []).map(col => h(tag || 'div', {
+        class: col.class,
+        style: col.style,
+    }, [fn2(h, { col, item, index, slots, tag })]));
 }

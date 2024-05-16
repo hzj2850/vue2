@@ -1,17 +1,49 @@
+<template>
+    <div class="my-table-com">
+        <table border="1">
+            <thead>
+                <table-head />
+            </thead>
+            <transition-group tag="tbody" name="t">
+                <tr v-for="(e, i) in listdata" :key="e[rowKey]">
+                    <cols-com tag="td" :cols="columns" :item="e" :index="i" :slots="$scopedSlots"/>
+                </tr>
+            </transition-group>
+        </table>
+    </div>
+</template>
+
 <script>
-import { colMap } from './cols.js'
+import { headRender } from './thead'
+import { colRender } from './cols'
 export default {
-    functional: true,
-    render: (h, f) => colMap(h, f.props)
+    props: {
+        columns: {
+            type: Array,
+            default: () => ([])
+        },
+        listdata: {
+            type: Array,
+            default: () => ([])
+        },
+        rowKey: {
+            type: String,
+            default: 'id'
+        }
+    },
+    components: {
+        'table-head': {
+            functional: true,
+            render: headRender,
+        },
+        'cols-com': {
+            functional: true,
+            render: colRender,
+        },
+    },
 }
 </script>
 
 <style lang="less" scoped>
-.td{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid red;
-}
+    @import url('./table.less');
 </style>

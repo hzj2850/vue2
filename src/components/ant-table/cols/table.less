@@ -1,0 +1,18 @@
+.t-move,
+.t-leave-active,
+.t-enter-active {
+    transition: all 3s linear;
+    color: red;
+}
+
+
+.my-table-com {
+    overflow: auto;
+    // 隐藏滚动条
+    scrollbar-width: none; // 火狐
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+}

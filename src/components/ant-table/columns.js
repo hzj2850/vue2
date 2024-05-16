@@ -15,7 +15,7 @@ export const columns = [
         style: 'min-width: 6em;left: 0;background: #fff;',
         // style: 'width:0;left: 0;box-shadow:none;padding:0;',
         customRender: res => {
-            if(res.item) res.content = res.index + 1;
+            if (res.item) res.content = res.index + 1;
             return res;
         }
     },
@@ -25,7 +25,7 @@ export const columns = [
         headRender: 'header',
         style: 'min-width: 12em;',
         customRender: res => {
-            if(res.index == 2) {
+            if (res.index == 2) {
                 res.obj.attrs.colspan = 2;
                 res.obj.style += 'color: red;';
             }
@@ -37,7 +37,7 @@ export const columns = [
         key: 'age',
         style: 'min-width: 12em;',
         customRender: res => {
-            if(res.index == 2) res.tag = null;
+            if (res.index == 2) res.tag = null;
             return res;
         }
     },
@@ -77,7 +77,7 @@ export const columns = [
         style: 'min-width: 32em;',
         customRender: res => {
             const t = res.content;
-            if(res.item) {
+            if (res.item) {
                 res.content = t == 0 ? '女' : t == 1 ? '男' : '未知';
                 res.obj.style += `color: ${t == 0 ? '#0ff' : t == 1 ? '#f0f' : 'red'};`
             }
@@ -86,7 +86,7 @@ export const columns = [
     },
     {
         title: '操作',
-        scopedSlots: 'action',
+        slot: 'action',
         class: 'fixed fix-first',
         style: 'min-width: 10em;right: 0;background: #fff;',
     },
