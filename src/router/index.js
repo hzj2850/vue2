@@ -14,8 +14,14 @@ const routes = [
       {
         path: 'form',
         name: 'form',
-        component: () => import(/* webpackChunkName: "form" */ '../views/tabs/form.vue'),
+        component: () => import(/* webpackChunkName: "form" */ '../views/form/index.vue'),
         meta: {title: '表单验证', icon: 'icon-a-3AHU01kongtiao'}
+      },
+      {
+        path: 'table',
+        name: 'table',
+        component: () => import(/* webpackChunkName: "form" */ '../views/table/index.vue'),
+        meta: {title: '表格', icon: 'icon-a-3AHU01kongtiao'}
       },
       {
         path: 'DragScale',

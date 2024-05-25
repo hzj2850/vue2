@@ -4,18 +4,16 @@
             <thead>
                 <table-head />
             </thead>
-            <transition-group tag="tbody" name="t">
-                <tr v-for="(e, i) in listdata" :key="e[rowKey]">
-                    <cols-com tag="td" :cols="columns" :item="e" :index="i" :slots="$scopedSlots"/>
-                </tr>
-            </transition-group>
+            <tbody-com />
+            {{ selectRowKeys }}
         </table>
     </div>
 </template>
 
 <script>
 import { headRender } from './thead'
-import { colRender } from './cols'
+import { tbodyRender } from './tbody'
+import { format } from './tree'
 export default {
     props: {
         columns: {
@@ -29,16 +27,33 @@ export default {
         rowKey: {
             type: String,
             default: 'id'
-        }
+        },
+        colKey: {
+            type: String,
+            default: '',
+        },
+        expandRowKeys: {
+            type: Array,
+            default: () => ([])
+        },
+        selectRowKeys: {
+            type: Array,
+            default: () => ([])
+        },
+    },
+    computed: {
+        list() {
+            return format(this.listdata, 'id', 'children');
+        },
     },
     components: {
         'table-head': {
             functional: true,
             render: headRender,
         },
-        'cols-com': {
+        'tbody-com': {
             functional: true,
-            render: colRender,
+            render: tbodyRender,
         },
     },
 }

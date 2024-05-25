@@ -1,12 +1,9 @@
-.t-move,
-.t-leave-active,
-.t-enter-active {
-    transition: all 3s linear;
-    color: red;
-}
-
+@import url('./icon/iconfont.css');
 
 .my-table-com {
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
     overflow: auto;
     text-align: center;
     // 隐藏滚动条
@@ -16,4 +13,39 @@
         width: 0 !important;
         height: 0 !important;
     }
+}
+
+tr{
+    &:hover{
+        background-color: rgba(43,126,202,0.1);
+    }
+}
+
+td{
+    height: 40px;
+}
+
+
+// 展开
+.exIcon{
+    display: inline-block;
+    user-select: none;
+    cursor: pointer;
+    transition: all 200ms linear;
+}
+.exIconOpen{
+    transform: rotate(-180deg);
+}
+
+// 多选框
+.iconcheck{
+    cursor: pointer;
+    user-select: none;
+    &:hover{
+        box-shadow: 0 0 5px -2px #1890FF;
+    }
+}
+
+.icon-check2,.icon-check3{
+    color: #1890FF;
 }

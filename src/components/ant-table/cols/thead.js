@@ -1,15 +1,15 @@
 // 计算rowspan
-const rowspan = (o, v = 0) => {
+export const rowspan = (o, k, v = 0) => {
     for (let e of o) {
-        if (e.child) return v + 1;
+        if ((e[k] || []).length > 0) return v + 1;
     }
     return v;
 }
 
 // 计算colspan
-const colspan = (a, b = []) => {
+export const colspan = (a, k, b = []) => {
     for (let e of a) {
-        if (e.child) colspan(e.child, b);
+        if ((e[k] || []).length > 0) colspan(e[k], k, b);
         else b.push(e.title);
     }
     return b.length;
@@ -32,8 +32,8 @@ const colMap = (h, c, a) => {
         class: e.class,
         style: e.style,
         attrs: {
-            rowspan: rowspan([e]),
-            colspan: colspan([e]),
+            rowspan: rowspan([e], 'child'),
+            colspan: colspan([e], 'child'),
         },
     }, [fn(e, c)]))
 }
