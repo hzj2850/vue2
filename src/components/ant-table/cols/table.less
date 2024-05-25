@@ -4,6 +4,7 @@
     background-color: #fff;
     color: #333;
     padding: 10px;
+    width: 100%;
     overflow: auto;
     text-align: center;
     // 隐藏滚动条
@@ -13,17 +14,37 @@
         width: 0 !important;
         height: 0 !important;
     }
-}
 
-tr{
-    &:hover{
-        background-color: rgba(43,126,202,0.1);
+    table{
+        min-width: 100%;
+    }
+    
+    th, td{
+        height: 40px;
+        font-size: 16px;
+        border-color: #cfcfcf;
+    }
+
+    thead{
+        background-color: #EFEFEF;
+    }
+
+    tbody{
+        > tr{
+            &:hover{
+                background-color: rgba(43,126,202,0.1);
+            }
+            
+        td{
+            height: 40px;
+        }
+        }
     }
 }
 
-td{
-    height: 40px;
-}
+
+
+
 
 
 // 展开

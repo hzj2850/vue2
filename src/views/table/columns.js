@@ -10,7 +10,7 @@
 export const columns = [
     {
         title: '全选',
-        style: 'width: 3em;min-width: 3em;',
+        style: 'width: 5em;min-width: 5em;',
         customRender(v) {
             return {
                 value: [v.check()]
@@ -35,7 +35,7 @@ export const columns = [
     {
         title: '年龄',
         key: 'age',
-        style: 'min-width: 1000px;',
+        style: 'min-width: 500px;',
         child: [
             {
                 title: '年龄1',
@@ -44,16 +44,6 @@ export const columns = [
             {
                 title: '年龄2',
                 key: 'age',
-                child: [
-                    {
-                        title: '111',
-                        key: 'name',
-                    },
-                    {
-                        title: '222',
-                        key: 'name',
-                    },
-                ]
             },
         ]
     },
@@ -88,5 +78,5 @@ export const listData = [
             { name: '111', age: 11, sex: 1, id: 7 },
         ]
     },
-    { name: '小红', age: 23, sex: 0, id: 2 },
+    { name: '小红', age: 23, sex: 0, id: 8 },
 ]

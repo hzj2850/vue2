@@ -1,9 +1,8 @@
 <template>
     <div>
-        <ant-layout></ant-layout>
-
+        <p>{{ openKeys }}</p>
         <button @click="onEdit">添加数据</button>
-        <AntTable2 :columns="columns" :listdata="listData" row-key="name">
+        <ant-table :columns="columns" :listdata="listData" :selectRowKeys="openKeys" row-key="name">
             <a slot="action" @click="onSe(item)" slot-scope="{item,index}">
                 查看{{ index }}
             </a>
@@ -11,23 +10,22 @@
                 <p>下拉展开内容</p>
                 {{ e }}
             </template>
-        </AntTable2>
+        </ant-table>
     </div>
 </template>
 
 <script>
-import AntTable2 from '@/components/ant-table/cols/index.vue'
-import AntLayout from '@/components/ant-layout/index.vue'
+import AntTable from '@/components/ant-table/cols/index.vue'
 import {columns, listData } from './columns'
 export default {
     components: {
-        AntTable2,
-        AntLayout
+        AntTable
     },
     data() {
         return {
             columns,
-            listData
+            listData,
+            openKeys: [],
         }
     },
     methods: {

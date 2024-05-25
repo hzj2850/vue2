@@ -142,3 +142,11 @@ export function getLayout(_this) {
         },]
     }]
 }
+
+export const rules = {
+    name: [{ required: true, message: '姓名必填', trigger: 'change' }],
+    IDCard: [{ required: true, message: '多选框必选', trigger: 'change' }],
+    rType: [{ required: true, message: '单选框必选', trigger: 'change' }],
+    gj: [{ required: true, message: '下拉框必选', trigger: 'change' }],
+    dirms: [{ required: true, message: '描述不能为空', trigger: 'change' }],
+}

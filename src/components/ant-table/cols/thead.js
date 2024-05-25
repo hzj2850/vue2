@@ -28,7 +28,7 @@ const fn = (e, c) => {
 
 // 列循环
 const colMap = (h, c, a) => {
-    return a.map(e => h('td', {
+    return a.map(e => h('th', {
         class: e.class,
         style: e.style,
         attrs: {

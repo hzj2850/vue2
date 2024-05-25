@@ -5,7 +5,6 @@
                 <table-head />
             </thead>
             <tbody-com />
-            {{ selectRowKeys }}
         </table>
     </div>
 </template>
