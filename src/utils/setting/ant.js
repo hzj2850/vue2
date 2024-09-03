@@ -18,7 +18,7 @@ import {
   // Row,
   // Col,
   Modal,
-  // Table,
+  Table,
   // Tabs,
   Icon,
   // Badge,
@@ -31,7 +31,7 @@ import {
   Spin,
   Menu,
   // Drawer,
-  // Tooltip,
+  Tooltip,
   // Alert,
   // Tag,
   // Divider,
@@ -77,7 +77,7 @@ const importAntd = Vue => {
   // Vue.use(Row)
   // Vue.use(Col)
   Vue.use(Modal)
-  // Vue.use(Table)
+  Vue.use(Table)
   // Vue.use(Tabs)
   Vue.use(Icon)
   // Vue.use(Badge)
@@ -90,7 +90,7 @@ const importAntd = Vue => {
   Vue.use(Spin)
   Vue.use(Menu)
   // Vue.use(Drawer)
-  // Vue.use(Tooltip)
+  Vue.use(Tooltip)
   // Vue.use(Alert)
   // Vue.use(Tag)
   // Vue.use(Divider)

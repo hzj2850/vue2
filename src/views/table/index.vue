@@ -1,42 +1,64 @@
 <template>
-    <div>
-        <p>{{ openKeys }}</p>
-        <button @click="onEdit">添加数据</button>
-        <ant-table :columns="columns" :listdata="listData" :selectRowKeys="openKeys" row-key="name">
-            <a slot="action" @click="onSe(item)" slot-scope="{item,index}">
-                查看{{ index }}
-            </a>
-            <template #expand="e">
-                <p>下拉展开内容</p>
-                {{ e }}
-            </template>
-        </ant-table>
-    </div>
+  <div class="page">
+    <my-table
+      ref="table"
+      :columns="columns"
+      :data-source="data"
+      :rowSelection="rowSelection()"
+      :customRow="customRow"
+    >
+      <a slot="action">action</a>
+      <span slot="customTitle">
+        序号
+        <a-icon type="smile-o" />
+      </span>
+    </my-table>
+  </div>
 </template>
 
 <script>
-import AntTable from '@/components/ant-table/cols/index.vue'
-import {columns, listData } from './columns'
+import myTable from "./ant-table/index.vue";
+import { columns, data } from "./columns";
 export default {
-    components: {
-        AntTable
-    },
-    data() {
-        return {
-            columns,
-            listData,
-            openKeys: [],
-        }
-    },
-    methods: {
-        onEdit() {
-            const obj = {...this.listData[0]};
-            obj.name += 1;
-            this.listData.push(obj);
+  components: {
+    myTable,
+  },
+  data() {
+    return {
+      columns,
+      data,
+      selectedRowKeys: ["1"],
+    };
+  },
+  methods: {
+    rowSelection() {
+      return {
+        selectedRowKeys: this.selectedRowKeys,
+        onChange: (a, b) => {
+          this.selectedRowKeys = a;
+          console.log(a, b);
         },
-        onSe(e) {
-            alert(JSON.stringify(e));
-        }
-    }
-}
+      };
+    },
+    customRow(record) {
+      return {
+        on: {
+          click: () => {
+            if (this.$refs.table.getdif()) return false;
+            console.log(record);
+          },
+        },
+      };
+    },
+  },
+};
 </script>
+
+<style lang="less" scoped>
+.page {
+  height: 100%;
+  background: #fff;
+  padding: 20px;
+  overflow: hidden;
+}
+</style>
