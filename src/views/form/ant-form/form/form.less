@@ -1,0 +1,93 @@
+// 输入框
+.ant-input {
+  margin: 0;
+  display: block;
+  font-size: inherit;
+}
+
+// 多行输入框（大型）
+.ant-input[size="large"] {
+  min-height: 40px;
+  padding: 6px 11px;
+}
+
+// 多行输入框（小型）
+.ant-input[size="small"] {
+  min-height: 24px;
+  padding: 1px 7px;
+}
+
+// 数字输入框
+.ant-input-number {
+  display: block;
+  width: 100%;
+}
+
+// 下拉框
+.ant-select {
+  display: block;
+}
+
+// 日期选择器
+.ant-calendar-picker {
+  display: block;
+}
+
+// 表单验证
+.ant-form-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  font-size: inherit;
+  &::before,
+  &::after {
+    display: none;
+  }
+  /deep/ .ant-form-item-label {
+    line-height: 32px;
+    font-size: inherit;
+    > label {
+      font-size: inherit;
+    }
+  }
+  /deep/ .ant-form-item-control-wrapper {
+    flex: 1;
+  }
+  /deep/ .ant-form-explain {
+    display: none;
+  }
+
+  /deep/ .has-error {
+    .ant-checkbox-inner {
+      border-color: red;
+    }
+    .ant-radio-inner {
+      border-color: red;
+    }
+  }
+}
+
+// 中型表单：32px
+.ant-form {
+  font-size: 14px;
+}
+
+// 大型表单：40px
+.ant-form[size="large"] {
+  font-size: 16px;
+  .ant-form-item {
+    /deep/ .ant-form-item-label {
+      line-height: 40px;
+    }
+  }
+}
+
+// 小型表单：24px
+.ant-form[size="small"] {
+  font-size: 14px;
+  .ant-form-item {
+    /deep/ .ant-form-item-label {
+      line-height: 24px;
+    }
+  }
+}

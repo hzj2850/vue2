@@ -1,74 +1,64 @@
 <template>
-    <div class="user-info-page">
-        <p>{{ form }}</p>
-
-        <ant-form :form="form" :layout="layout" :rules="rules" ref="form">
-            <template #userImg="e">
-                <img src="../../assets/img/swiper/1.jpg" :alt="e.text">
+    <div class="page">
+        <a-button @click="submit()">提交</a-button>
+        <ant-form ref="form" :layout="layout" :form="form" :rules="rules" :params="params" @change="bindChange">
+            <template #title="e">
+                <h2>title插槽：{{ e }}</h2>
             </template>
         </ant-form>
 
-        <div class="footer">
-            <a-button type="primary" @click="onSubmit">提交</a-button>
-        </div>
+        <div v-for="(e, k) of form" :key="k">{{ k + ' = ' + JSON.stringify(e) }}</div>
     </div>
 </template>
 
 <script>
-import antForm from '@/components/ant-form/ant-form.vue'
-import { getLayout, rules } from './form'
+import antForm from './ant-form/index.vue'
+import { layout, form, rules } from './form'
 export default {
-    components: {
-        antForm
-    },
+    components: { antForm },
     data() {
         return {
-            rules,
-            form: {},
-        };
+            form,
+            params: {
+                list: [
+                    { label: '男', value: 1 },
+                    { label: '女', value: 2 },
+                ]
+            }
+        }
     },
     computed: {
         layout() {
-            return getLayout(this);
+            return layout(this);
+        },
+        rules() {
+            return rules(this);
         },
     },
     methods: {
-        onSubmit() {
-            this.$refs.form.submit(res => {
-                if(res) {
-                    this.$message.error(res);
+        bindChange(k, v) {
+            console.log(k, v)
+        },
+        submit() {
+            this.$refs.form.submit(v => {
+                if(v) {
+                    this.$message.warning(v);
                 } else {
-                    alert("提交表单")
+                    alert("提交表单");
                 }
             });
         },
-    },
+    }
 }
 </script>
 
 <style lang="less" scoped>
-.user-info-page{
+.page{
     background: #fff;
-    color: #333;
-    padding: 10px;
-
+    color: #000;
+    padding: 30px;
     /deep/ td{
-        padding: 10px 20px;
-        border-color: #e9e9e9;
+        padding: 10px 15px;
     }
-}
-
-img{
-    width: 200px;
-    height: 200px;
-    border-radius: 4px;
-    object-fit: cover;
-}
-
-.footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
 }
 </style>
