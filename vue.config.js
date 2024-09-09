@@ -1,17 +1,3 @@
-/**
-* 接口域名的管理
-* @param production 正式环境
-* @param development 测试环境(开发运行时为空)
-* @param test 编译（文本）环境
-*/
-
-// 打包部署到服务器上的地址
-let publicPath = {
-    production: 'http://xxx_打包_正式环境.com/',
-    development: '',
-    test: 'http://yyy_打包_本地环境.com/'
-};
-
 const getNetworkIp = require('./src/utils/getNetworkIp');
 const path = require('path')
 function resolve(dir) {
@@ -20,7 +6,7 @@ function resolve(dir) {
 
 module.exports = {
     // 打包时的引入js,css路径
-    publicPath: publicPath[process.env.NODE_ENV] || '',
+    publicPath: process.env.VUE_APP_PUBLIC_PATH || '',
     // 构建时的输出目录
     outputDir: "dist",
     // 放置静态资源的目录
@@ -28,8 +14,21 @@ module.exports = {
     devServer: {
         open: true,
         host: getNetworkIp.networkIp,
-        port: 9003,
-        https: false
+        port: process.env.VUE_APP_PORT,
+        https: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        proxy: {
+            [process.env.VUE_APP_BASE_API]: {
+                target: process.env.VUE_APP_BASE_SYS + '',
+                changeOrigin: true,
+                logLevel: 'debug',
+                pathRewrite: {
+                    ['^' + process.env.VUE_APP_BASE_API]: ''
+                }
+            },
+        }
     },
     // 开启eslint代码规范检测
     lintOnSave: true,

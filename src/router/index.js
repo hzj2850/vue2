@@ -8,56 +8,56 @@ const routes = [
     path: '/',
     name: 'tabs',
     component: () => import(/* webpackChunkName: "home" */ '../views/tabs/index.vue'),
-    meta: {title: '二次封装模块'},
+    meta: { title: '二次封装模块' },
     redirect: 'form',
     children: [
       {
         path: 'form',
         name: 'form',
         component: () => import(/* webpackChunkName: "form" */ '../views/form/index.vue'),
-        meta: {title: '表单验证', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: '表单验证', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
         path: 'table',
         name: 'table',
         component: () => import(/* webpackChunkName: "form" */ '../views/table/index.vue'),
-        meta: {title: '表格', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: '表格', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
         path: 'DragScale',
         name: 'DragScale',
         component: () => import(/* webpackChunkName: "DragScale" */ '../views/tabs/DragScale.vue'),
-        meta: {title: '缩放/拖拽', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: '缩放/拖拽', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
         path: 'list',
         name: 'list',
         component: () => import(/* webpackChunkName: "list" */ '../views/tabs/list.vue'),
-        meta: {title: '列表组件', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: '列表组件', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
         path: 'swiper',
         name: 'swiper',
         component: () => import(/* webpackChunkName: "swiper" */ '../views/tabs/swiper.vue'),
-        meta: {title: '轮播图组件', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: '轮播图组件', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
         path: 'svg',
         name: 'svg',
         component: () => import(/* webpackChunkName: "svg" */ '../views/tabs/svg.vue'),
-        meta: {title: 'SVG组件', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: 'SVG组件', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
-        path: 'shopping',
-        name: 'shopping',
-        component: () => import(/* webpackChunkName: "shopping" */ '../views/tabs/shopping.vue'),
-        meta: {title: '抛物线', icon: 'icon-a-3AHU01kongtiao'}
+        path: 'jsonServe',
+        name: 'jsonServe',
+        component: () => import(/* webpackChunkName: "jsonServe" */ '../views/tabs/jsonServe.vue'),
+        meta: { title: 'json-serve', icon: 'icon-a-3AHU01kongtiao' }
       },
       {
         path: 'compress',
         name: 'compress',
         component: () => import(/* webpackChunkName: "compress" */ '../views/tabs/compress.vue'),
-        meta: {title: '压缩', icon: 'icon-a-3AHU01kongtiao'}
+        meta: { title: '压缩', icon: 'icon-a-3AHU01kongtiao' }
       },
     ]
   },
@@ -65,13 +65,13 @@ const routes = [
     path: '/shop',
     name: 'shop',
     component: () => import(/* webpackChunkName: "shop" */ '../views/shop/index.vue'),
-    meta: {title: '商品列表'}
+    meta: { title: '商品列表' }
   },
   {
     path: '/shop-details',
     name: 'shopDetails',
     component: () => import(/* webpackChunkName: "shopDetails" */ '../views/shop/details.vue'),
-    meta: {title: '商品详情'}
+    meta: { title: '商品详情' }
   },
   {
     path: '/shop-details2',

@@ -7,7 +7,7 @@ import router from './router/index'
 import store from './store/index'
 
 // ul库 【Ant Design Vue】
-import Antd from './utils/setting/ant'
+import Antd from './utils/ant'
 Vue.use(Antd);
 
 // ul库 二次封装
